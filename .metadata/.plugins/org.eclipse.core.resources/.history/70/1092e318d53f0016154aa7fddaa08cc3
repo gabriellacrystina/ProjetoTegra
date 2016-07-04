@@ -1,0 +1,7 @@
+/**
+ * Controle de Compra. Arquivo que valida dados do arquivo index.jsp
+ */
+
+var qtdeItens = document.getElementById("lbl-itens").value;
+
+alert("Qtde de Itens: " + qtdeItens);

@@ -1,0 +1,11 @@
+/**
+ * Controle de Compra. Arquivo que valida dados do arquivo index.jsp
+ */
+
+function validaCarrinho(){                     
+	var qtdeItens = document.getElementById("qtde-itens").textContent;
+	
+	if(qtdeItens == 0){
+		alert("Não há itens no carrinho!!");
+		}
+}	

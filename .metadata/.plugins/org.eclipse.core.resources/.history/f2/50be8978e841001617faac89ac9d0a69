@@ -1,0 +1,19 @@
+package dao;
+
+import java.util.List;
+
+import model.Produto;
+
+/**
+ * Data Object Access class
+ * 
+ * Classe que simula acesso ao banco de dados
+ */
+
+public class ProdutoDAO {
+	
+	private final static List<Produto> listaProdutos = new List<>();
+	
+	
+
+}

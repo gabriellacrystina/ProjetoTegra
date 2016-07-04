@@ -1,0 +1,30 @@
+package dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Produto;
+
+/**
+ * Data Object Access class
+ * 
+ * Classe que simula acesso ao banco de dados
+ */
+
+public class ProdutoDAO {
+	
+	private final static List<Produto> listaProdutos = new ArrayList<>();
+	
+	static{
+		adicionaProduto(new Produto("The Pragmatic Programmer: From Journeyman to Master", "Andrew Hunt & Dave Thomas", 40.00, 12));
+	}
+	
+	
+	//Metodo que gera id automático e adiciona um produto na lista.
+	private static void adicionaProduto(Produto produto){
+		int id = listaProdutos.size() + 1;
+		produto.setId(id);
+		listaProdutos.add(produto);
+	}
+
+}
