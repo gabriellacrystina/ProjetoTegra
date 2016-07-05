@@ -11,13 +11,16 @@ import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Carrinho;
+import model.Item;
 import model.Produto;
 import dao.ProdutoDAO;
 
 /**
  * Servlet implementation class BuscaProdutos
  */
-@WebServlet("/BuscaProdutos")
+@WebServlet("/Produtos")
 public class BuscaProdutos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,9 +36,10 @@ public class BuscaProdutos extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		
 		HttpSession sessao = request.getSession();
 		
+		//Gerando lista estatica.
 		List<Produto> produtos = new ProdutoDAO().getListaProdutos();
 		
 		//colocando na sessao a lista de produtos
@@ -49,8 +53,69 @@ public class BuscaProdutos extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	
+		HttpSession sessao = request.getSession();
+		Item item = new Item();
+		
+		//captura Lista de Produtos e LivrosEscolhidos da sessao.
+		List<Produto> produtos = (ArrayList<Produto>) sessao.getAttribute("listaProdutos");
+		ArrayList<Item> livrosEscolhidos = (ArrayList<Item>) sessao.getAttribute("listaItens");
+		
+		if(livrosEscolhidos == null){
+			livrosEscolhidos = new ArrayList<Item>();
+			sessao.setAttribute("listaItens", livrosEscolhidos);
+		}
+	
+		Produto produto;
+		Integer indice, quantidade;
+		
+		//**Montando um item para adicionar em livrosEscolhidos.
+		
+		indice = Integer.parseInt(request.getParameter("id-livro"));
+		
+		//Recebendo o indice do livro
+		System.out.println("Indice do livro" + indice);
+		
+		/**
+		produto = produtos.get(indice);
+		item.setProduto(produto);
+		
+		
+		
+		quantidade = item.getQuantidade() + 1;
+		item.setQuantidade(quantidade);
+		
+		livrosEscolhidos.add(item);
+		
+	
+		for(int i=0; i<livrosEscolhidos.size(); i++){
+			System.out.println("Titulo do Livro: " + livrosEscolhidos.get(i).getProduto().getTitulo()
+					+ " Quantidade: " + livrosEscolhidos.get(i).getQuantidade());
+		}
+		**/
+		/**
+		for(int i=0; i<livrosEscolhidos.size(); i++){
+			produto = livrosEscolhidos.get(i).getProduto();
+			if(produto.getId() == indice){
+				livrosEscolhidos.get(i).setQuantidade(1);
+			}else{
+				//Senão cria-se um novo item e adiciona na lista de livros escolhidos.
+						
+				//Produto
+				indice = Integer.parseInt(request.getParameter("id"));
+				produto = produtos.get(indice);
+				item.setProduto(produto);
+				
+				quantidade = item.getQuantidade() + 1;
+				item.setQuantidade(quantidade);
+			}
+		}
+		livrosEscolhidos.add(item);
+		
+		//retorna a lista de livros escolhidos pra sessao.
+		sessao.setAttribute("listaItens", livrosEscolhidos);
+		**/
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 }

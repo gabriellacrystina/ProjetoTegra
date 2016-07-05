@@ -2,6 +2,33 @@
  * Controle de Compra. Arquivo que valida dados do arquivo index.jsp
  */
 
+//capturando a lista de objetos pacientes da tabela
+var trLivros = document.getElementsByClassName("livros");
+
+for(var i=0; i < trLivros.length; i++ ){
+	var livroTr = trLivros[i];
+
+	var tdId = livroTr.getElementsByClassName("id-livro");
+	var tdNomeLivro = livroTr.getElementsByClassName("nome-livro");
+	var tdNomeAutor = livroTr.getElementsByClassName("nome-autor");
+	var tdPreco =livroTr.getElementsByClassName("preco");
+	var tdEstoque = livroTr.getElementsByClassName("estoque");
+	
+	var LivroAtual = {
+		id : tdId.textContent,
+		nomeLivro : tdNomeLivro.textContent,
+		nomeAutor : tdNomeAutor.textContent,
+		preco : tdPreco.textContent,
+		estoque : tdEstoque.textContent,
+		validaEstoque : function(){
+			if(this.estoque == 0){
+				alert("Produto indisponível em estoque!!");
+			}
+		}
+	}
+}
+
+
 function validaCarrinho(){                     
 	var qtdeItens = document.getElementById("qtde-itens").textContent;
 	
@@ -9,18 +36,3 @@ function validaCarrinho(){
 		alert("Não há itens no carrinho!!");
 	}
 }	
-
-function validaEstoque(){
-	var trLivros = document.getElementsByClassName("livros");
-	
-	for(var i=0; i < trLivros.length; i++ ){
-		var livro = trLivros[i];
-	
-		var estoque = livro.getElementsByClassName("estoque");
-		
-		if(estoque == 0){
-			alert("Produto indisponível em estoque!!");
-		}
-	}
-	
-}
