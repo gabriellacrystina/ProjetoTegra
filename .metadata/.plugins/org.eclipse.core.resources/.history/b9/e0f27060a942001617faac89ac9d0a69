@@ -73,19 +73,24 @@ public class BuscaProdutos extends HttpServlet {
 		
 		indice = Integer.parseInt(request.getParameter("id-livro"));
 		produto = produtos.get(indice - 1);
-		item.setProduto(produto);	
+		System.out.println("Produto selecionado: " + produtos.get(indice).getTitulo());
+		item.setProduto(produto);
 		
+		System.out.println("Livro escolhido: " + produto.getTitulo());
+		
+		
+		/**
 		quantidade = item.getQuantidade() + 1;
 		item.setQuantidade(quantidade);
 		
 		livrosEscolhidos.add(item);
 		
-		System.out.println("ENTROU NO FOR");
+	
 		for(int i=0; i<livrosEscolhidos.size(); i++){
 			System.out.println("Titulo do Livro: " + livrosEscolhidos.get(i).getProduto().getTitulo()
 					+ " Quantidade: " + livrosEscolhidos.get(i).getQuantidade());
 		}
-		
+		**/
 		/**
 		for(int i=0; i<livrosEscolhidos.size(); i++){
 			produto = livrosEscolhidos.get(i).getProduto();
