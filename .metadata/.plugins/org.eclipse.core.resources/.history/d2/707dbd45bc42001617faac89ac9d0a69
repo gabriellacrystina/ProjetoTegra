@@ -95,11 +95,10 @@ public class BuscaProdutos extends HttpServlet {
 			}
 			//item já existe na lista?
 			if(itemEncontrado != null){
-				//atualiza a quantidade deste item
 				quantidade = itemEncontrado.getQuantidade() + 1;
 				itemEncontrado.setQuantidade(quantidade);
 			}else{ 
-				//adiciona um novo item na lista
+				//novo item
 				item.setProduto(produto);	
 				
 				quantidade = item.getQuantidade() + 1;

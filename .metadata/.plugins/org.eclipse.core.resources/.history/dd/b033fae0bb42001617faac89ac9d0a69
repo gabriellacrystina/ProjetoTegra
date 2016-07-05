@@ -72,7 +72,7 @@ public class BuscaProdutos extends HttpServlet {
 		
 		//**Montando um item para adicionar em livrosEscolhidos.
 		
-		//Recebe o indice do livro
+		//Recebe o indice do livro;
 		indice = Integer.parseInt(request.getParameter("id-livro"));
 		produto = produtos.get(indice);
 		
@@ -95,19 +95,18 @@ public class BuscaProdutos extends HttpServlet {
 			}
 			//item já existe na lista?
 			if(itemEncontrado != null){
-				//atualiza a quantidade deste item
 				quantidade = itemEncontrado.getQuantidade() + 1;
 				itemEncontrado.setQuantidade(quantidade);
 			}else{ 
-				//adiciona um novo item na lista
 				item.setProduto(produto);	
 				
 				quantidade = item.getQuantidade() + 1;
 				item.setQuantidade(quantidade);
 
 				livrosEscolhidos.add(item);	
-			}	
+			}
 		}
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
+
 }

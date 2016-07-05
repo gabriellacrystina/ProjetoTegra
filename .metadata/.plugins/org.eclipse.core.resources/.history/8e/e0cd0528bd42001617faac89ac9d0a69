@@ -26,7 +26,8 @@
 			if( livrosEscolhidos != null){
 				for(Item i: livrosEscolhidos){
 					qtde = qtde + i.getQuantidade();
-					total = total +  i.getProduto().getPreco() * i.getQuantidade();
+					quantidade = i.getQuantidade();
+					total = total +  i.getProduto().getPreco() * quantidade;
 					
 				}
 				

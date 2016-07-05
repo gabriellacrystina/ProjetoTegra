@@ -25,14 +25,11 @@
 			double total=0;
 			if( livrosEscolhidos != null){
 				for(Item i: livrosEscolhidos){
-					quantidade = i.getQuantidade();
-					total = total +  i.getProduto().getPreco() * quantidade;
+					qtde = qtde + i.getQuantidade();
+					total = total +  i.getProduto().getPreco() * i.getQuantidade();
 					
 				}
-				qtde = livrosEscolhidos.size();
-			}else{
-				qtde = 0;
-				total = 0;
+				
 			}
 		%>
 			<div class="meu-carrinho">
