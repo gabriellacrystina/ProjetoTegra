@@ -40,7 +40,7 @@ public class Produto {
 		return estoque;
 	}
 	
-	public void atualizaEstoqueVenda(){
+	public void atualizaEstoqueCompra(){
 		this.estoque -= 1;
 	}
 	

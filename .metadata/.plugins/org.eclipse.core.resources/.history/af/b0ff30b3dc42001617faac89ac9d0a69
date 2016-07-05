@@ -79,14 +79,13 @@ public class BuscaProdutos extends HttpServlet {
 		//Se a lista estiver vazia
 		if(livrosEscolhidos.isEmpty()){
 			//add item
+			produto.atualizaEstoqueCompra();
 			item.setProduto(produto);	
 			
 			quantidade = item.getQuantidade() + 1;
 			item.setQuantidade(quantidade);
 
 			livrosEscolhidos.add(item);
-			
-			produto.atualizaEstoqueVenda();
 		}else{
 			//Senao percorre a lista
 			for(int i=0; i<livrosEscolhidos.size(); i++){
@@ -100,18 +99,17 @@ public class BuscaProdutos extends HttpServlet {
 				//atualiza a quantidade deste item
 				quantidade = itemEncontrado.getQuantidade() + 1;
 				itemEncontrado.setQuantidade(quantidade);
-				
-				produto.atualizaEstoqueVenda();
+				produto.atualizaEstoqueCompra();
 			}else{ 
 				//adiciona um novo item na lista
-				item.setProduto(produto);
+				item.setProduto(produto);	
+				produto.atualizaEstoqueCompra();
 				
 				quantidade = item.getQuantidade() + 1;
 				item.setQuantidade(quantidade);
-			
-				livrosEscolhidos.add(item);
 				
-				produto.atualizaEstoqueVenda();
+
+				livrosEscolhidos.add(item);	
 			}	
 		}
 		request.getRequestDispatcher("index.jsp").forward(request, response);

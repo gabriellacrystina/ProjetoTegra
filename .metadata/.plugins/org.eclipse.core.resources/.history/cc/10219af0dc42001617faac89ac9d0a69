@@ -104,14 +104,14 @@ public class BuscaProdutos extends HttpServlet {
 				produto.atualizaEstoqueVenda();
 			}else{ 
 				//adiciona um novo item na lista
-				item.setProduto(produto);
+				item.setProduto(produto);	
+				produto.atualizaEstoqueVenda();
 				
 				quantidade = item.getQuantidade() + 1;
 				item.setQuantidade(quantidade);
-			
-				livrosEscolhidos.add(item);
 				
-				produto.atualizaEstoqueVenda();
+
+				livrosEscolhidos.add(item);	
 			}	
 		}
 		request.getRequestDispatcher("index.jsp").forward(request, response);

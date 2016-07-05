@@ -14,7 +14,6 @@
 		<title>BookStore</title>
 	</head>
 	<body>
-	
 		<div class="cabecalho">
 			<h1>Bem vindo as Compras</h1>
 		</div>
@@ -42,7 +41,6 @@
 			
 			<table id="tbl-books">
 			  <tr>
-			  	<th class="id-livro">Id</th>
 			    <th>Titulo</th>
 			    <th>Autor</th> 
 			    <th>Preço (R$)</th>
@@ -54,14 +52,13 @@
 			  	for(Produto p: produtos){
 		  		%>
 		  			<tr class="livros">
-		  				<td class="id-livro"><%= p.getId() %></td>
 						<td class="nome-livro"><%= p.getTitulo() %></td>
 						<td class="nome-autor"><%= p.getAutor() %></td>
 						<td class="preco"><%= p.getPreco() %></td>
 						<td class="estoque"><%= p.getEstoque() %></td>
 						<td>
 							<form action="Produtos" method="post" name="produtos" >
-								<input type="hidden" name="id-livro" value="<%= p.getId() %>">
+								<input type="hidden" name="id-livro" value="<%=p.getId()%>">
 								<button class="btn btn-comprar" type="submit" onclick="validaEstoque">Comprar</button>
 							</form>
 							
