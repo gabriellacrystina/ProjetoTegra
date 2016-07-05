@@ -21,21 +21,20 @@
 		<%
 			//Retirar esta lógica daqui!!
 			ArrayList<Item> livrosEscolhidos = (ArrayList<Item>)session.getAttribute("listaItens");
-			int quantidade = 0, qtde=0;
+			int qtde=0;
 			double total=0;
 			if( livrosEscolhidos != null){
 				for(Item i: livrosEscolhidos){
 					qtde = qtde + i.getQuantidade();
 					total = total +  i.getProduto().getPreco() * i.getQuantidade();
 					
-				}
-				
+				}	
 			}
 		%>
 			<div class="meu-carrinho">
 				<div class="carrinho">	
 					<label id="meu-carrinho">Meu Carrinho</label><br>
-					Itens: <label class="lbl-itens" id="qtde-itens" /><%=qtde%><br>
+					Itens: <label class="lbl-itens" id="qtde-itens"/><%=qtde%><br>
 					Total: <label class="lbl-total" id="total" /><%=total%><br>
 					<button class="btn" id="btn-finalizar-compra" onclick="validaCarrinho()">Finalizar Compras</button>
 				</div>
@@ -63,7 +62,7 @@
 						<td>
 							<form action="Produtos" method="post" name="produtos" >
 								<input type="hidden" name="id-livro" value="<%= p.getId() %>">
-								<button class="btn btn-comprar" type="submit">Comprar</button>
+								<button class="btn btn-comprar" type="submit" onclick="validaEstoque">Comprar</button>
 							</form>
 							
 						</td>

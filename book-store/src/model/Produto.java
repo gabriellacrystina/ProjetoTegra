@@ -39,4 +39,12 @@ public class Produto {
 	public int getEstoque() {
 		return estoque;
 	}
+	
+	public void atualizaEstoqueCompra(){
+		this.estoque -= 1;
+	}
+	
+	public void atualizaEstoqueDevolucao(){
+		this.estoque += 1;
+	}
 }

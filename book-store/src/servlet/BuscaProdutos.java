@@ -79,6 +79,7 @@ public class BuscaProdutos extends HttpServlet {
 		//Se a lista estiver vazia
 		if(livrosEscolhidos.isEmpty()){
 			//add item
+			produto.atualizaEstoqueCompra();
 			item.setProduto(produto);	
 			
 			quantidade = item.getQuantidade() + 1;
@@ -98,12 +99,15 @@ public class BuscaProdutos extends HttpServlet {
 				//atualiza a quantidade deste item
 				quantidade = itemEncontrado.getQuantidade() + 1;
 				itemEncontrado.setQuantidade(quantidade);
+				produto.atualizaEstoqueCompra();
 			}else{ 
 				//adiciona um novo item na lista
 				item.setProduto(produto);	
+				produto.atualizaEstoqueCompra();
 				
 				quantidade = item.getQuantidade() + 1;
 				item.setQuantidade(quantidade);
+				
 
 				livrosEscolhidos.add(item);	
 			}	
