@@ -1,0 +1,138 @@
+package servlet;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Carrinho;
+import model.Item;
+import model.Produto;
+import dao.ProdutoDAO;
+
+/**
+ * Servlet implementation class BuscaProdutos
+ */
+@WebServlet("/Produtos")
+public class BuscaProdutos extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public BuscaProdutos() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession sessao = request.getSession();
+		
+		//Gerando lista estatica.
+		List<Produto> produtos = new ProdutoDAO().getListaProdutos();
+		
+		//colocando na sessao a lista de produtos
+		sessao.setAttribute("listaProdutos", produtos);
+		
+		//redirecionar pro index.
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
+	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		HttpSession sessao = request.getSession();
+		Item item = new Item();
+		
+		//captura Lista de Produtos e LivrosEscolhidos da sessao.
+		List<Produto> produtos = (ArrayList<Produto>) sessao.getAttribute("listaProdutos");
+		ArrayList<Item> livrosEscolhidos = (ArrayList<Item>) sessao.getAttribute("listaItens");
+		
+		if(livrosEscolhidos == null){
+			livrosEscolhidos = new ArrayList<Item>();
+			sessao.setAttribute("listaItens", livrosEscolhidos);
+		}
+	
+		Produto produto;
+		Integer indice, quantidade;
+		
+		//**Montando um item para adicionar em livrosEscolhidos.
+		
+		//Recebe o indice do livro;
+		indice = Integer.parseInt(request.getParameter("id-livro"));
+		produto = produtos.get(indice);
+		
+		//Se a lista estiver vazia
+		if(livrosEscolhidos.size() == 0){
+			//add item
+			item.setProduto(produto);	
+			
+			quantidade = item.getQuantidade() + 1;
+			item.setQuantidade(quantidade);
+			
+			livrosEscolhidos.add(item);
+		}else{
+			//Senao percorre a lista
+			for(int i=0; i<livrosEscolhidos.size(); i++){
+				//verifica se o item a ser adicionado já existe na lista
+				if(produto.getId() == livrosEscolhidos.get(i).getProduto().getId()){
+					//atualiza a quuantidade
+					quantidade = livrosEscolhidos.get(i).getQuantidade() + 1;
+					item.setQuantidade(quantidade);
+				}else{
+					//add item
+					item.setProduto(produto);	
+					
+					quantidade = item.getQuantidade() + 1;
+					item.setQuantidade(quantidade);
+					
+					livrosEscolhidos.add(item);
+				}
+			}
+		}
+		
+		System.out.println("ENTROU NO FOR");
+		for(int i=0; i<livrosEscolhidos.size(); i++){
+			System.out.println("Titulo do Livro: " + livrosEscolhidos.get(i).getProduto().getTitulo()
+					+ " Quantidade: " + livrosEscolhidos.get(i).getQuantidade());
+		}
+		
+		/**
+		for(int i=0; i<livrosEscolhidos.size(); i++){
+			produto = livrosEscolhidos.get(i).getProduto();
+			if(produto.getId() == indice){
+				livrosEscolhidos.get(i).setQuantidade(1);
+			}else{
+				//Senão cria-se um novo item e adiciona na lista de livros escolhidos.
+						
+				//Produto
+				indice = Integer.parseInt(request.getParameter("id"));
+				produto = produtos.get(indice);
+				item.setProduto(produto);
+				
+				quantidade = item.getQuantidade() + 1;
+				item.setQuantidade(quantidade);
+			}
+		}
+		livrosEscolhidos.add(item);
+		
+		//retorna a lista de livros escolhidos pra sessao.
+		sessao.setAttribute("listaItens", livrosEscolhidos);
+		**/
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
+
+}

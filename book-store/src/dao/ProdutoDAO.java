@@ -33,7 +33,7 @@ public class ProdutoDAO {
 	
 	//Metodo que gera id automático e adiciona um produto na lista.
 	private static void adicionaProduto(Produto produto){
-		int id = listaProdutos.size() + 1;
+		int id = listaProdutos.size();
 		produto.setId(id);
 		listaProdutos.add(produto);
 	}

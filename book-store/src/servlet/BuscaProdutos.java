@@ -65,49 +65,62 @@ public class BuscaProdutos extends HttpServlet {
 			livrosEscolhidos = new ArrayList<Item>();
 			sessao.setAttribute("listaItens", livrosEscolhidos);
 		}
-	
+		
 		Produto produto;
-		Integer indice, quantidade = 0;
+		Integer indice, quantidade=0;
+		Item itemEncontrado = null;
 		
 		//**Montando um item para adicionar em livrosEscolhidos.
 		
+		//Recebe o indice do livro;
 		indice = Integer.parseInt(request.getParameter("id-livro"));
-		produto = produtos.get(indice - 1);
-		item.setProduto(produto);	
+		produto = produtos.get(indice);
 		
-		quantidade = item.getQuantidade() + 1;
-		item.setQuantidade(quantidade);
-		
-		livrosEscolhidos.add(item);
-		
-		System.out.println("ENTROU NO FOR");
-		for(int i=0; i<livrosEscolhidos.size(); i++){
-			System.out.println("Titulo do Livro: " + livrosEscolhidos.get(i).getProduto().getTitulo()
-					+ " Quantidade: " + livrosEscolhidos.get(i).getQuantidade());
-		}
-		
-		/**
-		for(int i=0; i<livrosEscolhidos.size(); i++){
-			produto = livrosEscolhidos.get(i).getProduto();
-			if(produto.getId() == indice){
-				livrosEscolhidos.get(i).setQuantidade(1);
+		//Se a lista estiver vazia
+		if(livrosEscolhidos.isEmpty()){
+			//add item
+			item.setProduto(produto);	
+			
+			quantidade = item.getQuantidade() + 1;
+			item.setQuantidade(quantidade);
+
+			System.out.println(" 1.LISTA ESTA VAZIA -> ADD O PRIMEIRO ITEM - Titulo do livro: " 
+			+ produto.getTitulo() + " Quantidade: " + quantidade);
+			
+			livrosEscolhidos.add(item);
+		}else{
+			
+			System.out.println("2.LISTA NAO ESTA VAZIA PERCORRENDO A LISTA PARA VERIFICAR ITENS ESCOLHIDOS");
+			//Senao percorre a lista
+			System.out.println("Apresentando lista de livros escolhidos: ");
+			for(int i=0; i<livrosEscolhidos.size(); i++){
+				System.out.println("index: " + i + " -> Item: " + livrosEscolhidos.get(i).getProduto().getTitulo());
+				//verifica se o item a ser adicionado já existe na lista
+				System.out.println("Compara itens: " + produto.getTitulo() +  " == ou != " + livrosEscolhidos.get(i).getProduto().getTitulo());
+				if(produto.getTitulo().equals(livrosEscolhidos.get(i).getProduto().getTitulo())){
+					//Se sim guarda o item;
+					itemEncontrado = livrosEscolhidos.get(i);
+				}
+			}
+			if(itemEncontrado != null){
+				System.out.println("É IGUAL!!"); 
+				System.out.println("Quantidade deste item-> ANTES: " + itemEncontrado.getQuantidade());
+				//atualiza a quuantidade
+				quantidade = itemEncontrado.getQuantidade() + 1;
+				itemEncontrado.setQuantidade(quantidade);
+				System.out.println("Quantidade desse item-> DEPOIS: " + itemEncontrado.getQuantidade());
 			}else{
-				//Senão cria-se um novo item e adiciona na lista de livros escolhidos.
-						
-				//Produto
-				indice = Integer.parseInt(request.getParameter("id"));
-				produto = produtos.get(indice);
-				item.setProduto(produto);
+				System.out.println("É DIFERENTE!!"); 
+				item.setProduto(produto);	
 				
 				quantidade = item.getQuantidade() + 1;
 				item.setQuantidade(quantidade);
+
+				System.out.println("Adiciona o novo item no final da lista!!");
+				
+				livrosEscolhidos.add(item);	
 			}
 		}
-		livrosEscolhidos.add(item);
-		
-		//retorna a lista de livros escolhidos pra sessao.
-		sessao.setAttribute("listaItens", livrosEscolhidos);
-		**/
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
