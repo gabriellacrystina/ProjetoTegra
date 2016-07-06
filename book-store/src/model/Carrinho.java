@@ -27,6 +27,7 @@ public class Carrinho {
 	public void setCupom(String cupom) {
 		this.cupom = cupom;
 	}
+	
 	public boolean validaCupom(){
 		if(this.cupom.equals("TrabalheNaTegra")){
 			return true;

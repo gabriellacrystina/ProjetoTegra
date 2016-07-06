@@ -67,6 +67,7 @@ public class BuscaProdutos extends HttpServlet {
 		}
 		
 		Produto produto;
+		double subtotal = 0;
 		Integer indice, quantidade=0;
 		Item itemEncontrado = null;
 		
@@ -83,6 +84,9 @@ public class BuscaProdutos extends HttpServlet {
 			
 			quantidade = item.getQuantidade() + 1;
 			item.setQuantidade(quantidade);
+			
+			subtotal = quantidade * produto.getPreco();
+			item.setSubtotal(subtotal);
 
 			livrosEscolhidos.add(item);
 			
@@ -97,9 +101,10 @@ public class BuscaProdutos extends HttpServlet {
 			}
 			//item já existe na lista?
 			if(itemEncontrado != null){
-				//atualiza a quantidade deste item
-				quantidade = itemEncontrado.getQuantidade() + 1;
-				itemEncontrado.setQuantidade(quantidade);
+				//atualiza a quantidade e o subtotal deste item
+				itemEncontrado.addQuantidade();
+	
+				itemEncontrado.addSubtotal(itemEncontrado.getQuantidade() * produto.getPreco());
 				
 				produto.atualizaEstoqueVenda();
 			}else{ 
@@ -108,7 +113,10 @@ public class BuscaProdutos extends HttpServlet {
 				
 				quantidade = item.getQuantidade() + 1;
 				item.setQuantidade(quantidade);
-			
+				
+				subtotal = quantidade * produto.getPreco();
+				item.setSubtotal(subtotal);
+				
 				livrosEscolhidos.add(item);
 				
 				produto.atualizaEstoqueVenda();

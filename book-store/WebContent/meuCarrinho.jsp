@@ -29,17 +29,15 @@
 			  	
 			  	ArrayList<Item> livrosEscolhidos = (ArrayList<Item>)session.getAttribute("listaItens");
 				for(Item i: livrosEscolhidos){
-					double subtotal = 0;
-					subtotal = i.getProduto().getPreco() * i.getQuantidade();
 		  		%>
 		  			<tr class="livros">
 						<td class="nome-livro"><%= i.getProduto().getTitulo() %></td>
 						<td class="nome-autor"><%= i.getProduto().getAutor()%></td>
 						<td class="preco"><%= i.getProduto().getPreco() %></td>
 						<td class="quantidade"><%= i.getQuantidade()%></td>
-						<td class="subtotal">Colocar alguma coisa aqui</td>
+						<td class="subtotal"><%= i.getSubtotal() %></td>
 						<td>
-							<form action="Carrinho" method="post">
+							<form action="MeuCarrinho" method="post">
 								<input type="hidden" name="id-livro" value="<%=i.getProduto().getId()%>">
 								<button class="btn btn-comprar" type="submit">Remover</button>
 							</form>
