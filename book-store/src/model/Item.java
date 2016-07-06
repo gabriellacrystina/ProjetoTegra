@@ -1,10 +1,17 @@
 package model;
 
 public class Item {
+	private int id;
 	private Produto produto;
 	private int quantidade;
 	private double subtotal;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public Produto getProduto() {
 		return produto;
 	}
@@ -26,8 +33,7 @@ public class Item {
 	public void addQuantidade(){
 		this.quantidade += 1;  
 	}
-	public void addSubtotal(double novoSubtotal){
-		this.subtotal = novoSubtotal;
+	public void subQuantidade(){
+		this.quantidade -= 1;  
 	}
-
 }

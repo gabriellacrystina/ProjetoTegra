@@ -22,7 +22,7 @@
 			    <th>Autor</th> 
 			    <th>Preço (R$)</th>
 			    <th>Quantidade</th>
-			    <th>Subtotal</th>
+			    <th>Subtotal (R$)</th>
 			    <th>Remover</th>
 			  </tr>
 			  <%
@@ -31,22 +31,22 @@
 				for(Item i: livrosEscolhidos){
 		  		%>
 		  			<tr class="livros">
-						<td class="nome-livro"><%= i.getProduto().getTitulo() %></td>
+						<td class="nome-livro"><%= i.getProduto().getTitulo()%></td>
 						<td class="nome-autor"><%= i.getProduto().getAutor()%></td>
 						<td class="preco"><%= i.getProduto().getPreco() %></td>
 						<td class="quantidade"><%= i.getQuantidade()%></td>
 						<td class="subtotal"><%= i.getSubtotal() %></td>
 						<td>
 							<form action="MeuCarrinho" method="post">
-								<input type="hidden" name="id-livro" value="<%=i.getProduto().getId()%>">
+								<input type="hidden" name="id-item" value="<%=i.getId()%>">
 								<button class="btn btn-comprar" type="submit">Remover</button>
 							</form>
 						</td>
 					</tr>
-					
 		  		<% 
 			  	}
 			  %>
 			</table>
+			<br><a href="index.jsp">Voltar</a>
 	</body>
 </html>

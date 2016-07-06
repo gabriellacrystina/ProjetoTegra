@@ -33,11 +33,9 @@
 			<div class="meu-carrinho">
 				<div class="carrinho">	
 					<label id="meu-carrinho">Meu Carrinho</label><br>
-					<form action="MeuCarrinho" method="post">	
 						Itens: <output class="lbl-itens" id="qtde-itens" name="quantidade-itens"><%=qtde%></output><br>
 						Total: <output class="lbl-total" id="total" name="total-itens"><%=total%></output><br>
-						<button type="submit" class="btn" id="btn-finalizar-compra">Finalizar Compras</button>
-					</form>
+						<a href="meuCarrinho.jsp"><button type="submit" class="btn" id="btn-finalizar-compra">Finalizar Compras</button></a>
 				</div>
 			</div>
 			

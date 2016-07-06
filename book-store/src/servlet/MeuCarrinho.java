@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Carrinho;
 import model.Item;
+import model.Produto;
 
 /**
  * Servlet implementation class MeuCarrinho
@@ -41,10 +41,29 @@ public class MeuCarrinho extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-		Carrinho carrinho = new Carrinho();
-		
+		Produto produto;
 		ArrayList<Item> itensEscolhidos = (ArrayList<Item>) sessao.getAttribute("listaItens");
+		int indice = 0;
+		
+		
+		//Recebe o indice do livro
+		indice = Integer.parseInt(request.getParameter("id-item"));
+		produto = itensEscolhidos.get(indice).getProduto();
+		
+		produto.atualizaEstoqueDevolucao();
+
+		/** Construindo um objeto carrinho.
+		Carrinho carrinho = new Carrinho();
+		double total = 0;
+		
+		
 		carrinho.setListaItens(itensEscolhidos);
+		
+		for(Item i: itensEscolhidos){
+			total = total +  i.getProduto().getPreco() * i.getQuantidade();
+		}
+		carrinho.setTotal(total);
+		**/
 		
 		
 		
