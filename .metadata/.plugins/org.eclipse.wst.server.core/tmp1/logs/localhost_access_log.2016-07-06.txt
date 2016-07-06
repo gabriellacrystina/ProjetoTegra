@@ -1,0 +1,17 @@
+127.0.0.1 - - [06/Jul/2016:15:04:52 -0300] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [06/Jul/2016:15:04:56 -0300] "GET /book-store/Produtos HTTP/1.1" 200 7002
+0:0:0:0:0:0:0:1 - - [06/Jul/2016:15:04:56 -0300] "GET /book-store/book_store_stile.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [06/Jul/2016:15:04:56 -0300] "GET /book-store/controle-compra.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [06/Jul/2016:15:05:00 -0300] "POST /book-store/Produtos HTTP/1.1" 200 7003
+0:0:0:0:0:0:0:1 - - [06/Jul/2016:15:05:02 -0300] "POST /book-store/Produtos HTTP/1.1" 200 7003
+0:0:0:0:0:0:0:1 - - [06/Jul/2016:15:05:03 -0300] "POST /book-store/Produtos HTTP/1.1" 200 7003
+0:0:0:0:0:0:0:1 - - [06/Jul/2016:15:05:05 -0300] "POST /book-store/Carrinho HTTP/1.1" 200 2243
+0:0:0:0:0:0:0:1 - - [06/Jul/2016:15:05:12 -0300] "POST /book-store/Carrinho HTTP/1.1" 200 2243
+0:0:0:0:0:0:0:1 - - [06/Jul/2016:15:05:14 -0300] "POST /book-store/Carrinho HTTP/1.1" 200 2243
+127.0.0.1 - - [06/Jul/2016:15:13:40 -0300] "GET / HTTP/1.1" 404 994
+127.0.0.1 - - [06/Jul/2016:15:14:14 -0300] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [06/Jul/2016:15:14:20 -0300] "GET /book-store/Produtos HTTP/1.1" 200 7002
+0:0:0:0:0:0:0:1 - - [06/Jul/2016:15:14:22 -0300] "POST /book-store/Produtos HTTP/1.1" 200 7003
+0:0:0:0:0:0:0:1 - - [06/Jul/2016:15:14:23 -0300] "POST /book-store/Produtos HTTP/1.1" 200 7003
+0:0:0:0:0:0:0:1 - - [06/Jul/2016:15:14:23 -0300] "POST /book-store/Produtos HTTP/1.1" 200 7003
+0:0:0:0:0:0:0:1 - - [06/Jul/2016:15:14:25 -0300] "POST /book-store/Carrinho HTTP/1.1" 200 1224

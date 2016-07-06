@@ -8,7 +8,6 @@ public class Produto {
 	private Double preco;
 	private int estoque;
 	
-	
 	public Produto(String titulo, String autor, Double preco, int estoque) {
 		this.titulo = titulo;
 		this.autor = autor;
@@ -46,5 +45,9 @@ public class Produto {
 	
 	public void atualizaEstoqueDevolucao(){
 		this.estoque += 1;
+	}
+	
+	public void cupomDesconto(){
+		this.preco = preco - (preco * 0.1);
 	}
 }

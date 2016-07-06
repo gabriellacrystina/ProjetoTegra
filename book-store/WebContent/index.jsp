@@ -33,9 +33,11 @@
 			<div class="meu-carrinho">
 				<div class="carrinho">	
 					<label id="meu-carrinho">Meu Carrinho</label><br>
-					Itens: <label class="lbl-itens" id="qtde-itens"/><%=qtde%><br>
-					Total: <label class="lbl-total" id="total" /><%=total%><br>
-					<button class="btn" id="btn-finalizar-compra" onclick="validaCarrinho()">Finalizar Compras</button>
+					<form action="Carrinho" method="post">	
+						Itens: <output class="lbl-itens" id="qtde-itens" name="quantidade-itens"><%=qtde%></output><br>
+						Total: <output class="lbl-total" id="total" name="total-itens"><%=total%></output><br>
+						<button type="submit" class="btn" id="btn-finalizar-compra">Finalizar Compras</button>
+					</form>
 				</div>
 			</div>
 			
@@ -59,7 +61,7 @@
 						<td>
 							<form action="Produtos" method="post" name="produtos" >
 								<input type="hidden" name="id-livro" value="<%=p.getId()%>">
-								<button class="btn btn-comprar" type="submit" onclick="validaEstoque">Comprar</button>
+								<button class="btn btn-comprar" type="submit">Comprar</button>
 							</form>
 							
 						</td>
