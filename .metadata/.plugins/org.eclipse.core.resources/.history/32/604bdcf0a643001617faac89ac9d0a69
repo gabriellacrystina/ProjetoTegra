@@ -6,7 +6,7 @@ public class Carrinho {
 	
 	private ArrayList<Item> listaItens;
 	private double total;
-	private String cupom;
+	private double subtotal;
 	
 	
 	public ArrayList<Item> getListaItens() {
@@ -21,17 +21,10 @@ public class Carrinho {
 	public void setTotal(double total) {
 		this.total = total;
 	}
-	public String getCupom() {
-		return cupom;
+	public double getSubtotal() {
+		return subtotal;
 	}
-	public void setCupom(String cupom) {
-		this.cupom = cupom;
-	}
-	public boolean validaCupom(){
-		if(this.cupom.equals("TrabalheNaTegra")){
-			return true;
-		}else{
-			return false;
-		}
+	public void setSubtotal(double subtotal) {
+		this.subtotal = subtotal;
 	}
 }
