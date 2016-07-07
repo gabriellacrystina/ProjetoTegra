@@ -28,7 +28,8 @@
 					qtde = qtde + i.getQuantidade();
 					total = total +  i.getProduto().getPreco() * i.getQuantidade();
 					
-				}}
+				}	
+			}
 		%>
 			<div class="my-cart" >
 				<div class="cart">	
