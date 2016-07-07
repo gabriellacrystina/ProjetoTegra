@@ -30,7 +30,6 @@ h1 {
 
 #tbl-books tr:nth-child(odd){
 	background-color: #6D6460;
-	
 }
 
 th, td {
@@ -38,7 +37,7 @@ th, td {
     text-align: center;
 }
 
-.meu-carrinho{
+.my-cart{
 	width: 100%;
 	height: 110px; 
 	border-radius: 10px;
@@ -49,15 +48,25 @@ th, td {
 	margin-left: auto;
 	margin-right: auto;	
 }
+.cart{
+	float: right;
+	background-color: #c4bcb0;
+	border-radius: 10px;
+	padding-left: 10px;
+	padding-bottom: 5px;
+	margin-left: auto;
+	margin-right: auto;		
+}
+
 .carrinho{
 	background-color: #c4bcb0;
 	border-radius: 10px;
 	padding-left: 100px;
 	padding-right: 500px;
-	padding-bottom: 85px;		
+	padding-bottom: 85px;	
 }
 
-#meu-carrinho{
+#lbl-meu-carrinho{
 	font-size: 20px;
 	font-weight: bold;
 }
