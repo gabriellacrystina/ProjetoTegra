@@ -6,7 +6,6 @@
 <%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -28,8 +27,7 @@
 					qtde = qtde + i.getQuantidade();
 					total = total +  i.getProduto().getPreco() * i.getQuantidade();
 					
-				}	
-			}
+				}}
 		%>
 			<div class="my-cart" >
 				<div class="cart">	
@@ -41,7 +39,6 @@
 						</form>
 				</div>
 			</div>
-			
 			<table id="tbl-books">
 			  <tr>
 			    <th>Titulo</th>
@@ -50,7 +47,7 @@
 			    <th>Estoque</th>
 			    <th>Comprar</th>
 			  </tr>
-		  		<c:forEach var="livro" items="${listaProdutos}"  >
+		  		<c:forEach var="livro" items="${listaProdutos}">
 		  			<tr class="livros">
 						<td class="nome-livro">${livro.titulo}</td>
 						<td class="nome-autor">${livro.autor}</td>

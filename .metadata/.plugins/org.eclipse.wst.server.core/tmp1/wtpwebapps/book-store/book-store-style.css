@@ -4,8 +4,9 @@ body {
 	background-image: url("teste.png");
 	background-repeat: no-repeat;
 	background-position: right top;
-	background-attachment: fixed;
+	background-attachment: initial;
     width: 700px;
+    margin-top: 0px;
     margin-left: auto;
 	margin-right: auto;
 }
@@ -13,7 +14,8 @@ body {
 h1 {
 	font-style: oblique;
 	text-align: center;
-    color: #000000;   
+    color: #000000; 
+    margin-top: 0px;  
 }
 
 #tbl-books {
@@ -21,7 +23,6 @@ h1 {
 	font-family: "Arial", "Helvetica", sans-serif;
 	border: 1px solid #ffffff;
     border-collapse: collapse;
-    
 }
 
 #tbl-books tr:nth-child(even){
@@ -85,6 +86,46 @@ th, td {
 	margin-left: 10%;
 }
 
+.btn-validarCumpom{
+	margin-left: 60%;
+}
+
 .it-carrinho{
 	margin-right: 150px;
+}
+
+.img-desconto{
+	background-image: url("desconto.jpg");
+	width: 10%;
+	top:5px;
+	left:20px;
+	position:absolute;
+}
+
+#img-descricao{
+	color: #ffffff;
+	font-size: 10px;
+}
+
+h3, p{
+	color: #ffffff;
+	font-family: "Arial", "Helvetica", serif;
+}
+
+.desconto{
+	margin-top: 0px;
+	background-color: #6D2520;
+	width: 22%;
+	height: 100%;
+	left:35px;
+	text-align: left;
+	padding-top: 5%;
+	padding-left: 15px;
+	position:absolute;
+}
+
+#img-desconto{
+	padding-top: 20%;
+	width: 100%;
+	
 }

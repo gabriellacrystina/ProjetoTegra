@@ -2,6 +2,8 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="model.Item" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -10,13 +12,25 @@
 		<title>Carrinho</title>
 	</head>
 	<body>
+			<section class="desconto" >
+				<h3>Possui cumpom de desconto?</h3>
+				<p>Informe aqui: <input type="text" id="cupom" maxlength="15"></p>
+				<br>
+				<button class="btn btn-validarCumpom" type="submit">Validar Cupom</button>
+				
+				<figure>
+					<img id="img-desconto" src="desconto.jpg" />
+					<figcaption id="img-descricao">*Promoção destinada apenas aos livros do autor Martin Fowler</figcaption>
+				</figure>
+			</section>
+	
 			<h1>Itens do Carrinho</h1>
+			
 			<div class="my-cart">
 				<div class="carrinho">	
-					
+			
 				</div>
 			</div>
-	
 			<table id="tbl-books">
 			  <tr>
 			    <th>Titulo</th>
@@ -26,28 +40,24 @@
 			    <th>Subtotal (R$)</th>
 			    <th>Remover</th>
 			  </tr>
-			  <%
-			  	
-			  	ArrayList<Item> livrosEscolhidos = (ArrayList<Item>)session.getAttribute("listaItens");
-				for(Item i: livrosEscolhidos){
-		  		%>
+		  		<c:forEach var="item" items="${listaItens}">
 		  			<tr class="livros">
-						<td class="nome-livro"><%= i.getProduto().getTitulo()%></td>
-						<td class="nome-autor"><%= i.getProduto().getAutor()%></td>
-						<td class="preco"><%= i.getProduto().getPreco() %></td>
-						<td class="quantidade"><%= i.getQuantidade()%></td>
-						<td class="subtotal"><%= i.getSubtotal() %></td>
+						<td class="nome-livro">${item.getProduto().getTitulo()}</td>
+						<td class="nome-autor">${item.getProduto().getAutor()}</td>
+						<td class="preco">${item.getProduto().getPreco()}</td>
+						<td class="quantidade">${item.getQuantidade()}</td>
+						<td class="subtotal">${item.getSubtotal()}</td>
 						<td>
 							<form action="MeuCarrinho" method="post">
-								<input type="hidden" name="id-livro" value="<%=i.getProduto().getId()%>">
+								<input type="hidden" name="id-livro" value="${item.getProduto().getId()}"/>
 								<button class="btn btn-comprar" type="submit">Remover</button>
 							</form>
 						</td>
 					</tr>
-		  		<% 
-			  	}
-			  %>
+		  		</c:forEach>
 			</table>
+			<br>
+			
 			<br><a href="index.jsp">Voltar</a>
 	</body>
 </html>
