@@ -502,3 +502,6 @@ org.eclipse.wst.xml.core.internal.document.StructuredDocumentRegionManagementExc
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
 	at org.eclipse.equinox.launcher.Main.main(Main.java:1488)
+
+!ENTRY org.eclipse.jst.server.core 4 0 2016-07-06 19:48:45.016
+!MESSAGE Could not launch in profiling mode because no profilers are configured.

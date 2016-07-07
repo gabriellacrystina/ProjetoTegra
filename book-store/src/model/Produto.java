@@ -8,6 +8,11 @@ public class Produto {
 	private Double preco;
 	private int estoque;
 	
+	public Produto(int id) {
+		super();
+		this.id = id;
+	}
+
 	public Produto(String titulo, String autor, Double preco, int estoque) {
 		this.titulo = titulo;
 		this.autor = autor;

@@ -9,8 +9,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link rel="stylesheet" type="text/css" href="book_store_stile.css">
-		<script src="controle-compra.js"></script>
+		<link rel="stylesheet" type="text/css" href="index.css">
 		<title>BookStore</title>
 	</head>
 	<body>
@@ -44,7 +43,7 @@
 			    <th>Titulo</th>
 			    <th>Autor</th> 
 			    <th>Preço (R$)</th>
-			    <th>Quantidade de Estoque</th>
+			    <th>Estoque</th>
 			    <th>Comprar</th>
 			  </tr>
 			  <%

@@ -1,17 +1,27 @@
 package model;
 
 public class Item {
-	private int id;
 	private Produto produto;
 	private int quantidade;
 	private double subtotal;
 	
-	public int getId() {
-		return id;
+	public Item() {
+		super();
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public Item(Produto produto) {
+		super();
+		this.produto = produto;
 	}
+
+	@Override
+	public boolean equals( Object other ) {
+		if ( other instanceof Item ) {
+			Item itemOther = ( Item ) other;
+			return this.produto.getId() == itemOther.getProduto().getId();
+		} else return false;
+	}
+	
 	public Produto getProduto() {
 		return produto;
 	}
@@ -30,10 +40,17 @@ public class Item {
 	public void setSubtotal(double subtotal) {
 		this.subtotal = subtotal;
 	}
-	public void addQuantidade(){
+	public void adicionarQuantidade(){
 		this.quantidade += 1;  
 	}
-	public void subQuantidade(){
+	public void subtrairQuantidade(){
 		this.quantidade -= 1;  
 	}
+	public void adicionarSubtotal(double valorProduto){
+		this.subtotal += valorProduto;  
+	}
+	public void subtrairSubtotal(double valorProduto){
+		this.subtotal -= valorProduto;  
+	}
+	
 }

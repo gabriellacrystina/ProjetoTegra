@@ -1,0 +1,83 @@
+package servlet;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import model.Item;
+import model.Produto;
+
+/**
+ * Servlet implementation class MeuCarrinho
+ */
+@WebServlet("/MeuCarrinho")
+public class MeuCarrinho extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public MeuCarrinho() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Produto produto;
+		Item item;
+		ArrayList<Item> itensEscolhidos = (ArrayList<Item>) sessao.getAttribute("listaItens");
+		int indice = 0;
+		
+		
+		
+		//Recebe o indice do livro
+		indice = Integer.parseInt(request.getParameter("id-livro"));
+		produto = itensEscolhidos.get(indice).getProduto();
+		
+		for(int i=0;i< itensEscolhidos.size(); i++){
+			if(indice == itensEscolhidos.get(i).getProduto().getId()){
+				item = itensEscolhidos.get(i);
+				item.subQuantidade();
+				if(item.getQuantidade() == 0){
+					itensEscolhidos.remove(i);
+				}
+			}
+		}
+
+		/** Construindo um objeto carrinho.
+		Carrinho carrinho = new Carrinho();
+		double total = 0;
+		
+		
+		carrinho.setListaItens(itensEscolhidos);
+		
+		for(Item i: itensEscolhidos){
+			total = total +  i.getProduto().getPreco() * i.getQuantidade();
+		}
+		carrinho.setTotal(total);
+		**/
+		
+		
+		
+		request.getRequestDispatcher("meuCarrinho.jsp").forward(request, response);
+	}
+
+}

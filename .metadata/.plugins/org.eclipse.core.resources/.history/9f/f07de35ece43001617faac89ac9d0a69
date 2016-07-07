@@ -1,0 +1,52 @@
+package model;
+
+public class Item {
+	private Produto produto;
+	private int quantidade;
+	private double subtotal;
+	
+	public Item(Produto produto) {
+		super();
+		this.produto = produto;
+	}
+
+	@Override
+	public boolean equals( Object other ) {
+		if ( other instanceof Item ) {
+			Item itemOther = ( Item ) other;
+			return this.produto.getId() == itemOther.getProduto().getId();
+		} else return false;
+	}
+	
+	public Produto getProduto() {
+		return produto;
+	}
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+	public int getQuantidade() {
+		return quantidade;
+	}
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+	public double getSubtotal() {
+		return subtotal;
+	}
+	public void setSubtotal(double subtotal) {
+		this.subtotal = subtotal;
+	}
+	public void addQuantidade(){
+		this.quantidade += 1;  
+	}
+	public void subQuantidade(){
+		this.quantidade -= 1;  
+	}
+	public void addSubtotal(double valorProduto){
+		this.subtotal += valorProduto;  
+	}
+	public void subSubtotal(double valorProduto){
+		this.subtotal -= valorProduto;  
+	}
+	
+}

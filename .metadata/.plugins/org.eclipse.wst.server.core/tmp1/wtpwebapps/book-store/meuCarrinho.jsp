@@ -6,13 +6,14 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<link rel="stylesheet" type="text/css" href="book_store_stile.css">
+		<link rel="stylesheet" type="text/css" href="meuCarrinho.css">
 		<title>Carrinho</title>
 	</head>
 	<body>
+			<h1>Itens do Carrinho</h1>
 			<div class="meu-carrinho">
 				<div class="carrinho">	
-					<h1>Colocar alguma coisa aqui</h1>
+					
 				</div>
 			</div>
 	
@@ -38,7 +39,7 @@
 						<td class="subtotal"><%= i.getSubtotal() %></td>
 						<td>
 							<form action="MeuCarrinho" method="post">
-								<input type="hidden" name="id-item" value="<%=i.getId()%>">
+								<input type="hidden" name="id-livro" value="<%=i.getProduto().getId()%>">
 								<button class="btn btn-comprar" type="submit">Remover</button>
 							</form>
 						</td>
