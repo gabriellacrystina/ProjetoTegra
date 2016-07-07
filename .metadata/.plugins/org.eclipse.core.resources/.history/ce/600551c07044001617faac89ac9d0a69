@@ -31,7 +31,7 @@
 				}	
 			}
 		%>
-			<div class="my-cart" >
+			<div class="my-cart">
 				<div class="cart">	
 					<label id="lbl-meu-carrinho">Meu Carrinho</label><br>
 						Itens: <output class="lbl-itens" id="qtde-itens" name="quantidade-itens"><%=qtde%></output><br>
@@ -50,7 +50,7 @@
 			    <th>Estoque</th>
 			    <th>Comprar</th>
 			  </tr>
-		  		<c:forEach var="livro" items="${listaProdutos}">
+		  		<c:forEach var="livro" item="${listaProdutos}">
 		  			<tr class="livros">
 						<td class="nome-livro">${livro.titulo}</td>
 						<td class="nome-autor">${livro.autor}</td>
@@ -64,7 +64,9 @@
 							
 						</td>
 					</tr>
-				</c:forEach>
+		  		<% 
+			  	}
+			  %>
 			</table>
 		</body>
 </html>

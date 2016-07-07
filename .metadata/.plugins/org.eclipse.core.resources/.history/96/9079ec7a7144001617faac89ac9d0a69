@@ -31,7 +31,7 @@
 				}	
 			}
 		%>
-			<div class="my-cart" >
+			<div class="my-cart">
 				<div class="cart">	
 					<label id="lbl-meu-carrinho">Meu Carrinho</label><br>
 						Itens: <output class="lbl-itens" id="qtde-itens" name="quantidade-itens"><%=qtde%></output><br>
