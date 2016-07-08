@@ -44,13 +44,12 @@ public class MeuCarrinho extends HttpServlet {
 		HttpSession sessao = request.getSession();
 		Produto produto = null;
 		Item item = null;
-		int indice = 0;
-		
+		int indice = 0;	
 		
 		ArrayList<Item> itensEscolhidos = (ArrayList<Item>) sessao.getAttribute("listaItens");
 		double total = (Double)sessao.getAttribute("total");
 		int  qtdeLivros = (int)sessao.getAttribute("qtdeLivros");
-		
+				
 		//Recebe o indice do livro
 		indice = Integer.parseInt(request.getParameter("id-livro"));
 		
@@ -74,21 +73,7 @@ public class MeuCarrinho extends HttpServlet {
 		//Atualizando qtdeLivros adquiridos e o total;
 		sessao.setAttribute("qtdeLivros", qtdeLivros);
 		sessao.setAttribute("total", total);
-		
-		
-		
-		
-		/** Construindo um objeto carrinho.
-		Carrinho carrinho = new Carrinho();
-		double total = 0;
-		
-		carrinho.setListaItens(itensEscolhidos);
-		
-		for(Item i: itensEscolhidos){
-			total = total +  i.getProduto().getPreco() * i.getQuantidade();
-		}
-		carrinho.setTotal(total);
-		**/
+	
 		request.getRequestDispatcher("meuCarrinho.jsp").forward(request, response);
 	}
 }

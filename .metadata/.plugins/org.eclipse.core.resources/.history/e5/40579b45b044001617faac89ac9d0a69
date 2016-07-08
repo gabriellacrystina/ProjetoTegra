@@ -1,0 +1,75 @@
+package servlet;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import model.Carrinho;
+import model.Item;
+
+/**
+ * Servlet implementation class FinalizarCompra
+ */
+@WebServlet("/FinalizarCompra")
+public class FinalizarCompra extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public FinalizarCompra() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Carrinho carrinho = new Carrinho();
+		double total = 0;
+		String cupom = null;
+		
+		ArrayList<Item> livrosEscolhidos = (ArrayList<Item>) sessao.getAttribute("listaItens");
+		cupom = (String)sessao.getAttribute("cupom");
+		
+		//verificação do cupom
+		if(cupom.equals(null)){
+			carrinho.setCupom(null);
+		}else{
+			if(carrinho.validaCupom(cupom)){
+				carrinho.setCupom(cupom);
+				//chama função de cálculo de desconto
+				System.out.println("calcular o desconto");
+			}else{
+				//nega desconto
+				System.out.println("Cupom inválido");
+			}		
+		}
+		
+		carrinho.setListaItens(livrosEscolhidos);
+		
+		for(Item i: livrosEscolhidos){
+			total = total +  i.getProduto().getPreco() * i.getQuantidade();
+		}
+		carrinho.setTotal(total);
+		
+		
+	}
+
+}

@@ -28,11 +28,13 @@ public class Carrinho {
 		this.cupom = cupom;
 	}
 	
-	public boolean validaCupom(){
-		if(this.cupom.equals("TrabalheNaTegra")){
+	public boolean validaCupom(String cupom){
+		if(cupom.equals("TrabalheNaTegra")){
 			return true;
 		}else{
 			return false;
 		}
 	}
 }
+
+ 
