@@ -44,21 +44,17 @@ public class MeuCarrinho extends HttpServlet {
 		HttpSession sessao = request.getSession();
 		Produto produto = null;
 		Item item = null;
-		ArrayList<Item> itensEscolhidos = (ArrayList<Item>) sessao.getAttribute("listaItens");
 		int indice = 0;
+		
+		
+		ArrayList<Item> itensEscolhidos = (ArrayList<Item>) sessao.getAttribute("listaItens");
+		double total = (Double)sessao.getAttribute("total");
+		int  qtdeLivros = (int)sessao.getAttribute("qtdeLivros");
 		
 		//Recebe o indice do livro
 		indice = Integer.parseInt(request.getParameter("id-livro"));
 		
-		/**
-			->Outra maneira de pegar o indice correto
-		
-		indice = itensEscolhidos.indexOf( new Item( new Produto( indice ) ) );
-		if ( indice == -1 ) {
-			throw new IllegalStateException( "Esperava encontrar um produto com o indice=[" + indice + "]" );
-		}
-		item = itensEscolhidos.get( indice );
-		**/	
+		//Removendo livro do Carrinho
 		for(int i=0;i< itensEscolhidos.size(); i++){
 			if(indice == itensEscolhidos.get(i).getProduto().getId()){
 				produto = itensEscolhidos.get(i).getProduto();
@@ -68,11 +64,20 @@ public class MeuCarrinho extends HttpServlet {
 		
 		item.subtrairQuantidade();
 		item.subtrairSubtotal(produto.getPreco());
+		qtdeLivros--;
+		total = total - produto.getPreco();
 		
 		if(item.getQuantidade() == 0){
 			itensEscolhidos.remove(item);
 		}
-
+		
+		//Atualizando qtdeLivros adquiridos e o total;
+		sessao.setAttribute("qtdeLivros", qtdeLivros);
+		sessao.setAttribute("total", total);
+		
+		
+		
+		
 		/** Construindo um objeto carrinho.
 		Carrinho carrinho = new Carrinho();
 		double total = 0;

@@ -56,6 +56,10 @@ public class BuscaProdutos extends HttpServlet {
 	
 		HttpSession sessao = request.getSession();
 		Item item = new Item();
+		Produto produto;
+		double subtotal = 0, total=0;
+		Integer indice, quantidade=0, qtdeLivros=0;
+		Item itemEncontrado = null;
 		
 		//captura Lista de Produtos e LivrosEscolhidos da sessao.
 		List<Produto> produtos = (ArrayList<Produto>) sessao.getAttribute("listaProdutos");
@@ -66,14 +70,9 @@ public class BuscaProdutos extends HttpServlet {
 			sessao.setAttribute("listaItens", livrosEscolhidos);
 		}
 		
-		Produto produto;
-		double subtotal = 0;
-		Integer indice, quantidade=0;
-		Item itemEncontrado = null;
+		/**Montando um item para adicionar em livrosEscolhidos.**/
 		
-		//**Montando um item para adicionar em livrosEscolhidos.
-		
-		//Recebe o indice do livro
+		//Indice do livro
 		indice = Integer.parseInt(request.getParameter("id-livro"));
 		produto = produtos.get(indice);
 		
@@ -124,15 +123,12 @@ public class BuscaProdutos extends HttpServlet {
 		}
 		
 		//Total de livros e valor correspondente
-		int qtdeLivros=0;
-		double total=0;
 		if( livrosEscolhidos != null){
 			for(Item i: livrosEscolhidos){
 				qtdeLivros = qtdeLivros + i.getQuantidade();
 				total = total +  i.getProduto().getPreco() * i.getQuantidade();		
 			}
 		}
-		
 		sessao.setAttribute("qtdeLivros", qtdeLivros);
 		sessao.setAttribute("total", total);
 		

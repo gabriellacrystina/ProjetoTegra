@@ -17,7 +17,6 @@
 				<p>Informe aqui: <input type="text" id="cupom" maxlength="15"></p>
 				<br>
 				<button class="btn btn-validarCumpom" type="submit">Validar Cupom</button>
-				
 				<figure>
 					<img id="img-desconto" src="desconto.jpg" />
 					<figcaption id="img-descricao">*Promoção destinada apenas aos livros do autor Martin Fowler</figcaption>
@@ -28,25 +27,27 @@
 			
 			<div class="my-cart">
 				<div class="carrinho">	
-			
+				    Quantidade de Livros Escolhidos: <output class="output-carrinho" id="qtde-itens" name="quantidade-itens">${qtdeLivros}</output>
+				    <br><br>
+					Total: <output class="output-carrinho" id="total" name="total-itens">${total} R$</output>
 				</div>
 			</div>
 			<table id="tbl-books">
 			  <tr>
 			    <th>Titulo</th>
 			    <th>Autor</th> 
-			    <th>Preço (R$)</th>
+			    <th>Preço</th>
 			    <th>Quantidade</th>
-			    <th>Subtotal (R$)</th>
+			    <th>Subtotal</th>
 			    <th>Remover</th>
 			  </tr>
 		  		<c:forEach var="item" items="${listaItens}">
 		  			<tr class="livros">
 						<td class="nome-livro">${item.getProduto().getTitulo()}</td>
 						<td class="nome-autor">${item.getProduto().getAutor()}</td>
-						<td class="preco">${item.getProduto().getPreco()}</td>
+						<td class="preco">R$ ${item.getProduto().getPreco()}</td>
 						<td class="quantidade">${item.getQuantidade()}</td>
-						<td class="subtotal">${item.getSubtotal()}</td>
+						<td class="subtotal">R$ ${item.getSubtotal()}</td>
 						<td>
 							<form action="MeuCarrinho" method="post">
 								<input type="hidden" name="id-livro" value="${item.getProduto().getId()}"/>

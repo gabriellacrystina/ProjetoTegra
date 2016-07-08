@@ -21,7 +21,7 @@
 				<div class="cart">	
 					<label id="lbl-meu-carrinho">Meu Carrinho</label><br>
 						Itens: <output class="lbl-itens" id="qtde-itens" name="quantidade-itens">${qtdeLivros}</output><br>
-						Total: <output class="lbl-total" id="total" name="total-itens">${total}</output><br>
+						Total: <output class="lbl-total" id="total" name="total-itens">${total} R$</output><br>
 						<form action="MeuCarrinho">
 							<button type="submit" class="btn" id="btn-finalizar-compra">Finalizar Compras</button>
 						</form>
@@ -31,7 +31,7 @@
 			  <tr>
 			    <th>Titulo</th>
 			    <th>Autor</th> 
-			    <th>Preço (R$)</th>
+			    <th>Preço</th>
 			    <th>Estoque</th>
 			    <th>Comprar</th>
 			  </tr>
@@ -39,7 +39,7 @@
 		  			<tr class="livros">
 						<td class="nome-livro">${livro.titulo}</td>
 						<td class="nome-autor">${livro.autor}</td>
-						<td class="preco">${livro.preco}</td>
+						<td class="preco">R$ ${livro.preco}</td>
 						<td class="estoque">${livro.estoque}</td>
 						<td>
 							<form action="Produtos" method="post" name="produtos" >

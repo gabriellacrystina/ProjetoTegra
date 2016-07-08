@@ -1,0 +1,61 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="model.Produto" %>
+<%@ page import="model.Item" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" type="text/css" href="book-store-style.css">
+		<title>BookStore</title>
+	</head>
+	<body>
+		<div class="cabecalho">
+			<h1>Bem vindo as Compras</h1>
+		</div>
+			<div class="my-cart" >
+				<div class="cart">	
+					<label id="lbl-meu-carrinho">Meu Carrinho</label><br>
+					<c:if test="${not empty listaItens}">
+						Itens: <output class="lbl-itens" id="qtde-itens" name="quantidade-itens">${qtdeLivros}</output><br>
+						Total: <output class="lbl-total" id="total" name="total-itens">${total}</output><br>
+					</c:if>
+					<c:if test="${empty listaItens}">
+						Itens: <output class="lbl-itens" id="qtde-itens" name="quantidade-itens">0</output><br>
+						Total: <output class="lbl-total" id="total" name="total-itens">0</output><br>
+					</c:if>
+						<form action="MeuCarrinho">
+							<button type="submit" class="btn" id="btn-finalizar-compra">Finalizar Compras</button>
+						</form>
+				</div>
+			</div>
+			<table id="tbl-books">
+			  <tr>
+			    <th>Titulo</th>
+			    <th>Autor</th> 
+			    <th>Preço (R$)</th>
+			    <th>Estoque</th>
+			    <th>Comprar</th>
+			  </tr>
+		  		<c:forEach var="livro" items="${listaProdutos}">
+		  			<tr class="livros">
+						<td class="nome-livro">${livro.titulo}</td>
+						<td class="nome-autor">${livro.autor}</td>
+						<td class="preco">${livro.preco}</td>
+						<td class="estoque">${livro.estoque}</td>
+						<td>
+							<form action="Produtos" method="post" name="produtos" >
+								<input type="hidden" name="id-livro" value="${livro.id}">
+								<button class="btn btn-comprar" type="submit">Comprar</button>
+							</form>
+							
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</body>
+</html>

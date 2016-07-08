@@ -5,9 +5,9 @@ body {
 	background-repeat: no-repeat;
 	background-position: right top;
 	background-attachment: initial;
-    width: 700px;
+    width: 710px;
     margin-top: 0px;
-    margin-left: auto;
+    margin-left: 27%;
 	margin-right: auto;
 }
 
@@ -15,7 +15,8 @@ h1 {
 	font-style: oblique;
 	text-align: center;
     color: #000000; 
-    margin-top: 0px;  
+    margin-top: 0px; 
+    font-family: cursive; 
 }
 
 #tbl-books {
@@ -36,6 +37,11 @@ h1 {
 th, td {
     padding: 15px;
     text-align: center;
+}
+
+
+.nome-livro{
+	text-align: left;
 }
 
 .my-cart{
@@ -61,10 +67,14 @@ th, td {
 
 .carrinho{
 	background-color: #c4bcb0;
+	height: 90%;
+	text-align: left;
 	border-radius: 10px;
-	padding-left: 100px;
-	padding-right: 500px;
-	padding-bottom: 85px;	
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font: small-caption;
+    font-weight: 700;	
 }
 
 #lbl-meu-carrinho{
