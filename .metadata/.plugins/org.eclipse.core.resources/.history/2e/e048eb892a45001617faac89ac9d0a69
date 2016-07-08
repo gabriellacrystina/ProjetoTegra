@@ -63,7 +63,6 @@ public class MeuCarrinho extends HttpServlet {
 		
 		item.subtrairQuantidade();
 		item.subtrairSubtotal(produto.getPreco());
-		produto.atualizaEstoqueDevolucao();
 		qtdeLivros--;
 		total = total - produto.getPreco();
 		
