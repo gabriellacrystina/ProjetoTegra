@@ -20,6 +20,9 @@
 				<img id="img-desconto" src="desconto.jpg" />
 				<figcaption id="img-descricao">*Promoção destinada apenas aos livros do autor Martin Fowler</figcaption>
 			</figure>
+			<c:if test="${resultado != null}" >
+				<c:out value="${resultado}"/>
+			</c:if>
 		</section>
 		<h1>Itens do Carrinho</h1>
 		<div class="my-cart">

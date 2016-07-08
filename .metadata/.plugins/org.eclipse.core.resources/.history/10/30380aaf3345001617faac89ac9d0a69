@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<link rel="stylesheet" type="text/css" href="book-store-style.css">
+		<title>Carrinho</title>
+	</head>
+	<body>
+		<section class="desconto" >
+			<h3>Possui cumpom de desconto?</h3>
+				<form action="FinalizarCompra" method="post">
+					<p>Informe aqui: <input type="text" id="cupom" name="cupom" maxlength="15"></p>
+					<br><button class="btn btn-validarCumpom" type="submit">Validar Cupom</button>
+				</form>
+			<figure>
+				<img id="img-desconto" src="desconto.jpg" />
+				<figcaption id="img-descricao">*Promoção destinada apenas aos livros do autor Martin Fowler</figcaption>
+			</figure>
+			<c:if test="${resultado != null}" />
+				<c:out value="${resultado}"/>
+			</c:if>
+		</section>
+		<h1>Itens do Carrinho</h1>
+		<div class="my-cart">
+			<div class="carrinho">	
+			    Quantidade de Livros Escolhidos: <output class="output-carrinho" id="qtde-itens" name="quantidade-itens">${qtdeLivros}</output>
+			    <br><br>
+				Total: <output class="output-carrinho" id="total" name="total-itens">${total} R$</output>
+			</div>
+		</div>
+		<table id="tbl-books">
+		  <tr>
+		    <th>Titulo</th>
+		    <th>Autor</th> 
+		    <th>Preço</th>
+		    <th>Quantidade</th>
+		    <th>Subtotal</th>
+		    <th>Remover</th>
+		  </tr>
+	  		<c:forEach var="item" items="${listaItens}">
+	  			<tr class="livros">
+					<td class="nome-livro">${item.getProduto().getTitulo()}</td>
+					<td class="nome-autor">${item.getProduto().getAutor()}</td>
+					<td class="preco">R$ ${item.getProduto().getPreco()}</td>
+					<td class="quantidade">${item.getQuantidade()}</td>
+					<td class="subtotal">R$ ${item.getSubtotal()}</td>
+					<td>
+						<form action="MeuCarrinho" method="post">
+							<input type="hidden" name="id-livro" value="${item.getProduto().getId()}"/>
+							<button class="btn btn-comprar" type="submit">Remover</button>
+						</form>
+					</td>
+				</tr>
+	  		</c:forEach>
+		</table>
+		<br>
+		<br><a href="index.jsp">Voltar</a>
+	</body>
+</html>

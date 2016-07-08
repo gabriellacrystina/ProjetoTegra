@@ -85,7 +85,7 @@ public class BuscaProdutos extends HttpServlet {
 			
 			subtotal = quantidade * produto.getPreco();
 			item.setSubtotal(subtotal);
-			
+
 			livrosEscolhidos.add(item);
 			
 			produto.atualizaEstoqueVenda();

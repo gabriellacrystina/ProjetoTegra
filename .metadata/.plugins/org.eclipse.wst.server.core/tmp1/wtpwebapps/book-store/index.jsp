@@ -17,7 +17,7 @@
 				<div class="cart">	
 					<label id="lbl-meu-carrinho">Meu Carrinho</label><br>
 						Itens: <output class="lbl-itens" id="qtde-itens" name="quantidade-itens">${qtdeLivros}</output><br>
-						Total: <output class="lbl-total" id="total" name="total-itens">${total} R$</output><br>
+						Total Parcial: <output class="lbl-total" id="total" name="total-itens">${total} R$</output><br>
 						<form action="MeuCarrinho">
 							<button type="submit" class="btn" id="btn-finalizar-compra">Finalizar Compras</button>
 						</form>

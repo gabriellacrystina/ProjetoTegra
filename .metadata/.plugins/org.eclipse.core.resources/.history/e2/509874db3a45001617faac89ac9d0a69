@@ -1,0 +1,84 @@
+package servlet;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import model.Carrinho;
+import model.Item;
+import model.Produto;
+
+/**
+ * Servlet implementation class FinalizarCompra
+ */
+@WebServlet("/FinalizarCompra")
+public class FinalizarCompra extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public FinalizarCompra() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Carrinho carrinho = new Carrinho();
+		Produto produto = null;
+		double total = 0;
+		String cupom = null, resultado=null;
+		
+		ArrayList<Item> livrosEscolhidos = (ArrayList<Item>) sessao.getAttribute("listaItens");
+		cupom = (String)request.getParameter("cupom");
+		
+		//verificação do cupom
+		if(cupom.isEmpty() || cupom.equals(null)){
+			carrinho.setCupom(null);
+		}else{
+			if(carrinho.validaCupom(cupom)){
+				carrinho.setCupom(cupom);
+				carrinho.setListaItens(livrosEscolhidos);
+				if(carrinho.calcDesconto()){
+					resultado = "Parabéns você acaba de ganhar 10% de desconto nos livros de Martin Fowler!!";
+				}else{
+					resultado = "Cupom válido apenas pra livros do autor Martin Fowler!!";
+				}
+			}else{
+				resultado = "Cupom inválido!!";
+			}		
+		}
+		
+		for(Item i: livrosEscolhidos){
+			total = total +  i.getProduto().getPreco() * i.getQuantidade();
+		}
+		carrinho.setTotal(total);
+		
+		if(resultado == null){
+			//Faz nada!!
+		}else{
+			sessao.setAttribute("resultado", resultado);
+		}
+		sessao.setAttribute("carrinho", carrinho);
+		
+		request.getRequestDispatcher("meuCarrinho.jsp").forward(request, response);
+	}
+}

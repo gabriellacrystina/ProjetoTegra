@@ -4,23 +4,7 @@ public class Item {
 	private Produto produto;
 	private int quantidade;
 	private double subtotal;
-	
-	public Item() {
-		super();
-	}
-
-	public Item(Produto produto) {
-		super();
-		this.produto = produto;
-	}
-
-	@Override
-	public boolean equals( Object other ) {
-		if ( other instanceof Item ) {
-			Item itemOther = ( Item ) other;
-			return this.produto.getId() == itemOther.getProduto().getId();
-		} else return false;
-	}
+	private double desconto;
 	
 	public Produto getProduto() {
 		return produto;
@@ -40,17 +24,25 @@ public class Item {
 	public void setSubtotal(double subtotal) {
 		this.subtotal = subtotal;
 	}
+	public void setDesconto(double desconto) {
+		this.desconto = desconto;
+	}
+	public double getDesconto(){
+		return desconto;
+	}
 	public void adicionarQuantidade(){
 		this.quantidade += 1;  
 	}
 	public void subtrairQuantidade(){
 		this.quantidade -= 1;  
 	}
-	public void adicionarSubtotal(double valorProduto){
-		this.subtotal += valorProduto;  
+	public void adicionarSubtotal(double valor){
+		this.subtotal += valor;  
 	}
-	public void subtrairSubtotal(double valorProduto){
-		this.subtotal -= valorProduto;  
+	public void subtrairSubtotal(double valor){
+		this.subtotal -= valor;  
 	}
-	
+	public void subtrairDesconto(double valor){
+		this.desconto -= valor;  
+	}
 }

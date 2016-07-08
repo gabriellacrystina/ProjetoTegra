@@ -1,0 +1,60 @@
+package model;
+
+import java.util.ArrayList;
+
+public class Carrinho {
+	
+	private ArrayList<Item> listaItens;
+	private double total;
+	private String cupom;
+	private double desconto;
+
+	public ArrayList<Item> getListaItens() {
+		return listaItens;
+	}
+	public void setListaItens(ArrayList<Item> listaItens) {
+		this.listaItens = listaItens;
+	}
+	public double getTotal() {
+		return total;
+	}
+	public void setTotal(double total) {
+		this.total = total;
+	}
+	public String getCupom() {
+		return cupom;
+	}
+	public Double getDesconto() {
+		return desconto;
+	}
+	public void setCupom(String cupom) {
+		this.cupom = cupom;
+	}
+	
+	public boolean validaCupom(String cupom){
+		if(cupom.equals("TrabalheNaTegra")){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	/*Metodo que percorre os itens escolhidos e verifica 
+	 * se o autor da promoção está contido na lista
+	 * Se o autor constar na lista, aplica o desconto*/
+	public boolean calcDesconto(){
+		boolean descontoAplicado = false;
+		this.desconto = 0.0;
+		for(Item i: this.listaItens){
+			if(i.getProduto().getAutor().equals("Martin Fowler")){
+				desconto = (i.getSubtotal() * 0.1);
+				i.subtrairSubtotal(desconto);
+				i.setSubtotal((i.getSubtotal() - desconto));
+				descontoAplicado = true;
+			}
+		}
+		this.total -= desconto;
+		return descontoAplicado;
+	} 
+}
+
+ 
