@@ -4,7 +4,7 @@ public class Item {
 	private Produto produto;
 	private int quantidade;
 	private double subtotal;
-	private double valorDesconto;
+	private double desconto;
 	
 	public Produto getProduto() {
 		return produto;
@@ -24,11 +24,11 @@ public class Item {
 	public void setSubtotal(double subtotal) {
 		this.subtotal = subtotal;
 	}
-	public void setValorDesconto(double valorDesconto) {
-		this.valorDesconto = valorDesconto;
+	public void setDesconto(double desconto) {
+		this.desconto = desconto;
 	}
-	public double getValorDesconto(){
-		return valorDesconto;
+	public double getDesconto(){
+		return desconto;
 	}
 	public void adicionarQuantidade(){
 		this.quantidade += 1;  
@@ -43,6 +43,6 @@ public class Item {
 		this.subtotal -= valor;  
 	}
 	public void subtrairDesconto(double valor){
-		this.valorDesconto -= valor;  
+		this.desconto -= valor;  
 	}
 }

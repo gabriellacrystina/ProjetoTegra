@@ -49,9 +49,9 @@ public class Carrinho {
 	// Aplica o desconto
 	public void calculaDesconto(Item item){
 		if(item != null){
-			item.setValorDesconto((item.getSubtotal() * 0.1));
-			item.subtrairSubtotal(item.getValorDesconto());
-			this.total -= item.getValorDesconto();
+			item.setDesconto((item.getSubtotal() * 0.1));
+			item.subtrairSubtotal(item.getDesconto());
+			this.total -= item.getDesconto();
 		}
 	}
 }

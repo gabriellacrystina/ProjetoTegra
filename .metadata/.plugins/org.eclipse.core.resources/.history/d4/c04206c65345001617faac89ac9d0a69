@@ -62,8 +62,8 @@ public class MeuCarrinho extends HttpServlet {
 		}
 		
 		//Verificar se este é um item com desconto
-		if(item.getValorDesconto() > 0.0){
-			double descontoUnitario = (item.getValorDesconto()/item.getQuantidade());
+		if(item.getDesconto() > 0.0){
+			double descontoUnitario = (item.getDesconto()/item.getQuantidade());
 			item.subtrairSubtotal((produto.getPreco() - descontoUnitario));
 			item.subtrairDesconto(descontoUnitario);
 			total -= produto.getPreco() - descontoUnitario;

@@ -43,6 +43,6 @@ public class Item {
 		this.subtotal -= valor;  
 	}
 	public void subtrairDesconto(double valor){
-		this.valorDesconto -= valor;  
+		this.desconto -= valor;  
 	}
 }
