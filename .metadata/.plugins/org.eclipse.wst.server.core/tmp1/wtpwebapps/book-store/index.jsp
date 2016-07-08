@@ -17,23 +17,11 @@
 		<div class="cabecalho">
 			<h1>Bem vindo as Compras</h1>
 		</div>
-		<%
-			//Retirar esta lógica daqui!!
-			ArrayList<Item> livrosEscolhidos = (ArrayList<Item>)session.getAttribute("listaItens");
-			int qtde=0;
-			double total=0;
-			if( livrosEscolhidos != null){
-				for(Item i: livrosEscolhidos){
-					qtde = qtde + i.getQuantidade();
-					total = total +  i.getProduto().getPreco() * i.getQuantidade();
-					
-				}}
-		%>
 			<div class="my-cart" >
 				<div class="cart">	
 					<label id="lbl-meu-carrinho">Meu Carrinho</label><br>
-						Itens: <output class="lbl-itens" id="qtde-itens" name="quantidade-itens"><%=qtde%></output><br>
-						Total: <output class="lbl-total" id="total" name="total-itens"><%=total%></output><br>
+						Itens: <output class="lbl-itens" id="qtde-itens" name="quantidade-itens">${qtdeLivros}</output><br>
+						Total: <output class="lbl-total" id="total" name="total-itens">${total}</output><br>
 						<form action="MeuCarrinho">
 							<button type="submit" class="btn" id="btn-finalizar-compra">Finalizar Compras</button>
 						</form>

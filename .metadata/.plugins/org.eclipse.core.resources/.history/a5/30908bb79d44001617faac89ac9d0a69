@@ -68,7 +68,7 @@ public class BuscaProdutos extends HttpServlet {
 		
 		Produto produto;
 		double subtotal = 0;
-		Integer indice, quantidade=0;
+		Integer indice, quantidade=0, id=0;
 		Item itemEncontrado = null;
 		
 		//**Montando um item para adicionar em livrosEscolhidos.
@@ -87,7 +87,7 @@ public class BuscaProdutos extends HttpServlet {
 			
 			subtotal = quantidade * produto.getPreco();
 			item.setSubtotal(subtotal);
-			
+
 			livrosEscolhidos.add(item);
 			
 			produto.atualizaEstoqueVenda();
@@ -122,20 +122,6 @@ public class BuscaProdutos extends HttpServlet {
 				produto.atualizaEstoqueVenda();
 			}	
 		}
-		
-		//Total de livros e valor correspondente
-		int qtdeLivros=0;
-		double total=0;
-		if( livrosEscolhidos != null){
-			for(Item i: livrosEscolhidos){
-				qtdeLivros = qtdeLivros + i.getQuantidade();
-				total = total +  i.getProduto().getPreco() * i.getQuantidade();		
-			}
-		}
-		
-		sessao.setAttribute("qtdeLivros", qtdeLivros);
-		sessao.setAttribute("total", total);
-		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 }
