@@ -70,59 +70,55 @@ public class BuscaProdutos extends HttpServlet {
 			sessao.setAttribute("listaItens", livrosEscolhidos);
 		}
 		
+		/**Montando um item para adicionar em livrosEscolhidos.**/
 		//Indice do livro
 		indice = Integer.parseInt(request.getParameter("id-livro"));
 		produto = produtos.get(indice);
 		
-		if(produto.contemEstoqueDisponivel()){
-			/**Montando um item para adicionar em livrosEscolhidos.**/
-			//Se a lista estiver vazia
-			if(livrosEscolhidos.isEmpty()){
-				//add item
-				item.setProduto(produto);	
+		//Se a lista estiver vazia
+		if(livrosEscolhidos.isEmpty()){
+			//add item
+			item.setProduto(produto);	
+			
+			quantidade = item.getQuantidade() + 1;
+			item.setQuantidade(quantidade);
+			
+			subtotal = quantidade * produto.getPreco();
+			item.setSubtotal(subtotal);
+
+			livrosEscolhidos.add(item);
+			
+			produto.atualizaEstoqueVenda();
+		}else{
+			//Senao percorre a lista
+			for(int i=0; i<livrosEscolhidos.size(); i++){
+				//verifica se o item a ser adicionado já existe na lista
+				if(produto.getTitulo().equals(livrosEscolhidos.get(i).getProduto().getTitulo())){
+					itemEncontrado = livrosEscolhidos.get(i);
+				}
+			}
+			//item já existe na lista?
+			if(itemEncontrado != null){
+				//atualiza a quantidade e o subtotal deste item
+				itemEncontrado.adicionarQuantidade();
+	
+				itemEncontrado.adicionarSubtotal(produto.getPreco());
+				
+				produto.atualizaEstoqueVenda();
+			}else{ 
+				//adiciona um novo item na lista
+				item.setProduto(produto);
 				
 				quantidade = item.getQuantidade() + 1;
 				item.setQuantidade(quantidade);
 				
 				subtotal = quantidade * produto.getPreco();
 				item.setSubtotal(subtotal);
-
+				
 				livrosEscolhidos.add(item);
 				
 				produto.atualizaEstoqueVenda();
-			}else{
-				//Senao percorre a lista
-				for(int i=0; i<livrosEscolhidos.size(); i++){
-					//verifica se o item a ser adicionado já existe na lista de livros Escolhidos
-					if(produto.getTitulo().equals(livrosEscolhidos.get(i).getProduto().getTitulo())){
-						itemEncontrado = livrosEscolhidos.get(i);
-					}
-				}
-				//item já existe na lista?
-				if(itemEncontrado != null){
-					//atualiza a quantidade e o subtotal deste item
-					itemEncontrado.adicionarQuantidade();
-		
-					itemEncontrado.adicionarSubtotal(produto.getPreco());
-					
-					produto.atualizaEstoqueVenda();
-				}else{ 
-					//senao adiciona um novo item na lista
-					item.setProduto(produto);
-					
-					quantidade = item.getQuantidade() + 1;
-					item.setQuantidade(quantidade);
-					
-					subtotal = quantidade * produto.getPreco();
-					item.setSubtotal(subtotal);
-					
-					livrosEscolhidos.add(item);
-					
-					produto.atualizaEstoqueVenda();
-				}	
-			}
-		}else{
-			resultado = "Produto com estoque indisponível temporariamente!!!";
+			}	
 		}
 		
 		//Total de livros e valor correspondente
@@ -132,9 +128,9 @@ public class BuscaProdutos extends HttpServlet {
 				total = total +  i.getProduto().getPreco() * i.getQuantidade();		
 			}
 		}
-		sessao.setAttribute("resultado", resultado);
 		sessao.setAttribute("qtdeLivros", qtdeLivros);
 		sessao.setAttribute("total", total);
+		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 }

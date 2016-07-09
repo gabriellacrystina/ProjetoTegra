@@ -23,6 +23,9 @@
 						</form>
 				</div>
 			</div>
+			<c:if test="${resultado != null}" >
+				<c:out value="${resultado}"/>
+			</c:if>
 			<table id="tbl-books">
 			  <tr>
 			    <th>Titulo</th>

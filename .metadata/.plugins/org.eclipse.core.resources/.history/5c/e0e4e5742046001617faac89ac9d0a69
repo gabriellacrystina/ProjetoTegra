@@ -93,7 +93,7 @@ public class BuscaProdutos extends HttpServlet {
 			}else{
 				//Senao percorre a lista
 				for(int i=0; i<livrosEscolhidos.size(); i++){
-					//verifica se o item a ser adicionado já existe na lista de livros Escolhidos
+					//verifica se o item a ser adicionado já existe na lista
 					if(produto.getTitulo().equals(livrosEscolhidos.get(i).getProduto().getTitulo())){
 						itemEncontrado = livrosEscolhidos.get(i);
 					}
@@ -107,7 +107,7 @@ public class BuscaProdutos extends HttpServlet {
 					
 					produto.atualizaEstoqueVenda();
 				}else{ 
-					//senao adiciona um novo item na lista
+					//adiciona um novo item na lista
 					item.setProduto(produto);
 					
 					quantidade = item.getQuantidade() + 1;
@@ -135,6 +135,7 @@ public class BuscaProdutos extends HttpServlet {
 		sessao.setAttribute("resultado", resultado);
 		sessao.setAttribute("qtdeLivros", qtdeLivros);
 		sessao.setAttribute("total", total);
+		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 }
