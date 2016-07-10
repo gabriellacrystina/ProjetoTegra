@@ -1,0 +1,161 @@
+package servlet;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import model.Carrinho;
+import model.Item;
+import model.Produto;
+
+/**
+ * Servlet implementation class FinalizarCompra
+ * Classe responsavel pelo controle do uso do cupom.
+ */
+@WebServlet("/FinalizarCompra")
+public class FinalizarCompra extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public FinalizarCompra() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.getRequestDispatcher("ConcluirCompra.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		Carrinho carrinho = new Carrinho();
+		Item item = null;
+		double total;
+		String cupom = null, resultado=null;
+		
+		ArrayList<Item> livrosEscolhidos = (ArrayList<Item>) sessao.getAttribute("listaItens");
+		cupom = (String)request.getParameter("cupom");
+		
+		
+		total = (Double) sessao.getAttribute("total");
+		
+		if(livrosEscolhidos != null){
+			//verificação do cupom
+			if(cupom.isEmpty() || cupom.equals(null)){
+				//faz nada
+			}else{
+				if(validaCupom(cupom)){
+					item = contemNaLista(livrosEscolhidos);
+					if(item != null){
+						if(item.getValorDesconto() == 0.0){//este item já sofreu algum desconto?
+							calculaDesconto(item);
+							total -= item.getValorDesconto();
+							resultado = "Parabéns você acaba de ganhar 10% de desconto no(s) livros de Martin Fowler!!";
+						}else{
+							//se o item possui valor de desconto, significa que o cupom já foi utilizado para este item.
+							resultado = "Cupom já foi utilizado!";
+						}
+					}else{
+						resultado = "Cupom válido apenas pra livros do autor Martin Fowler!!";
+					}
+				}else{
+					resultado = "Cupom inválido!!";
+				}
+			}
+		}else{
+			resultado = "Carrinho nao possu itens!!";
+		}
+		
+	/**
+		
+		if(livrosEscolhidos != null){
+			carrinho.setListaItens(livrosEscolhidos);
+			carrinho.calculaTotal();
+			
+			//verificação do cupom
+			if(cupom.isEmpty() || cupom.equals(null)){
+				carrinho.setCupom(null);
+			}else{
+				if(carrinho.validaCupom(cupom)){
+					carrinho.setCupom(cupom);
+					item = carrinho.contemNaLista();
+					if(item != null){
+						if(item.getValorDesconto() == 0.0){//este item já sofreu algum desconto?
+							carrinho.calculaDesconto(item);
+							resultado = "Parabéns você acaba de ganhar 10% de desconto no(s) livros de Martin Fowler!!";
+						}else{
+							//se o item possui valor de desconto, significa que o cupom já foi utilizado para este item.
+							resultado = "Cupom já foi utilizado!";
+						}
+					}else{
+						resultado = "Cupom válido apenas pra livros do autor Martin Fowler!!";
+					}
+				}else{
+					resultado = "Cupom inválido!!";
+				}		
+			}
+		}else{
+			resultado = "Carrinho nao possu itens!!";
+		}
+		**/
+		
+		if(resultado != null){
+			sessao.setAttribute("resultado", resultado);
+		}
+		
+		sessao.setAttribute("total", carrinho.getTotal());
+		sessao.setAttribute("carrinho", carrinho);
+		
+		request.getRequestDispatcher("meuCarrinho.jsp").forward(request, response);
+	}
+	
+	
+	public boolean validaCupom(String cupom){
+		if(cupom.equals("TrabalheNaTegra")){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	/*Metodo que percorre os itens escolhidos e verifica 
+	 * se o autor da promoção está contido em algum item na lista de livros Escolhidos*/
+	public Item contemNaLista( ArrayList<Item> listaItens){
+		Item item = null;
+		if(listaItens != null){
+			for(Item i: listaItens){
+				if(i.getProduto().getAutor().equals("Martin Fowler")){
+					item = i;
+				}
+			}
+			return item;
+		}
+		return null;
+	}
+	
+	// Aplica o desconto
+	public void calculaDesconto(Item item){
+		if(item != null){
+			item.setValorDesconto((item.getSubtotal() * 0.1));
+			item.subtrairSubtotal(item.getValorDesconto());
+		}
+	}
+}
+
+
+

@@ -10,11 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Carrinho;
 import model.Item;
 import model.Produto;
 
 /**
  * Servlet implementation class MeuCarrinho
+ * Classe que dada as opcoes escolhidas pelo cliente eh reponsavel
+ * pela remocao do produto da lista de livros escolhidos.
  */
 @WebServlet("/MeuCarrinho")
 public class MeuCarrinho extends HttpServlet {
@@ -40,7 +43,6 @@ public class MeuCarrinho extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		HttpSession sessao = request.getSession();
 		Produto produto = null;
 		Item item = null;
@@ -78,7 +80,6 @@ public class MeuCarrinho extends HttpServlet {
 		produto.atualizaEstoqueDevolucao();
 		qtdeLivros--;
 		
-		
 		if(item.getQuantidade() == 0){
 			itensEscolhidos.remove(item);
 		}
@@ -86,7 +87,7 @@ public class MeuCarrinho extends HttpServlet {
 		//Atualizando qtdeLivros adquiridos e o total;
 		sessao.setAttribute("qtdeLivros", qtdeLivros);
 		sessao.setAttribute("total", total);
-	
+		
 		request.getRequestDispatcher("meuCarrinho.jsp").forward(request, response);
 	}
 }

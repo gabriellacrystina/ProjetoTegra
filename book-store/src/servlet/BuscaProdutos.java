@@ -18,6 +18,9 @@ import dao.ProdutoDAO;
 
 /**
  * Servlet implementation class BuscaProdutos
+ * Classe responsavel por gerar uma lista estatica de produtos;
+ * E ainda montar uma lista de livros escolhidos pelo o usuário.
+ * 
  */
 @WebServlet("/Produtos")
 public class BuscaProdutos extends HttpServlet {

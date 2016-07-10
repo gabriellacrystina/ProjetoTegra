@@ -18,7 +18,7 @@
 					<br><button class="btn btn-validarCumpom" type="submit" onclick="return validarCupom()">Validar Cupom</button>
 				</form>
 			<figure>
-				<img id="img-desconto" src="desconto.jpg" />
+				<img id="img-desconto" src="img/desconto.jpg" />
 				<figcaption id="img-descricao">*Promoção destinada apenas aos livros do autor Martin Fowler</figcaption>
 			</figure>
 			<c:if test="${resultado != null}" >
@@ -31,6 +31,9 @@
 			    Quantidade de Livros Escolhidos: <output class="output-carrinho" id="qtde-itens" name="quantidade-itens">${qtdeLivros}</output>
 			    <br><br>
 				Total: <output class="output-carrinho" id="total" name="total-itens">${total} R$</output>
+				<form action="FinalizarCompra">
+						<button type="submit" class="btn btn-concluirCompra">Finalizar Compras</button>
+				</form>
 			</div>
 		</div>
 		<table id="tbl-books">
