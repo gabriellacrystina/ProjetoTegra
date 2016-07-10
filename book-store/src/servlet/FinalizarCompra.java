@@ -43,45 +43,47 @@ public class FinalizarCompra extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
 		Carrinho carrinho = new Carrinho();
-		double total = 0;
-		Item itemDeDesconto = null;
+		Item item = null;
 		String cupom = null, resultado=null;
 		
 		ArrayList<Item> livrosEscolhidos = (ArrayList<Item>) sessao.getAttribute("listaItens");
 		cupom = (String)request.getParameter("cupom");
-		total = (Double) sessao.getAttribute("total");
 		
 		carrinho.setListaItens(livrosEscolhidos);
-		carrinho.setTotal(total);
+		carrinho.calculaTotal();
 		
-		//verificação do cupom
-		if(cupom.isEmpty() || cupom.equals(null)){
-			carrinho.setCupom(null);
-		}else{
-			if(carrinho.validaCupom(cupom)){
-				carrinho.setCupom(cupom);
-				itemDeDesconto = carrinho.contemNaLista();
-				if(itemDeDesconto != null){
-					if(itemDeDesconto.getValorDesconto() == 0.0){
-						carrinho.calculaDesconto(itemDeDesconto);
-						resultado = "Parabéns você acaba de ganhar 10% de desconto no(s) livros de Martin Fowler!!";
+		if(carrinho.getListaItens() != null){
+			//verificação do cupom
+			if(cupom.isEmpty() || cupom.equals(null)){
+				carrinho.setCupom(null);
+			}else{
+				if(carrinho.validaCupom(cupom)){
+					carrinho.setCupom(cupom);
+					item = carrinho.contemNaLista();
+					if(item != null){
+						if(item.getValorDesconto() == 0.0){//este item já sofreu algum desconto?
+							carrinho.calculaDesconto(item);
+							resultado = "Parabéns você acaba de ganhar 10% de desconto no(s) livros de Martin Fowler!!";
+						}else{
+							//se o item possui valor de desconto, significa que o cupom já foi utilizado para este item.
+							resultado = "Cupom já foi utilizado!";
+						}
 					}else{
-						resultado = "Cupom já foi utilizado!";
+						resultado = "Cupom válido apenas pra livros do autor Martin Fowler!!";
 					}
 				}else{
-					resultado = "Cupom válido apenas pra livros do autor Martin Fowler!!";
-				}
-			}else{
-				resultado = "Cupom inválido!!";
-			}		
+					resultado = "Cupom inválido!!";
+				}		
+			}
+		}else{
+			resultado = "Carrinho nao possu itens!!";
 		}
-
+		
 		if(resultado != null){
 			sessao.setAttribute("resultado", resultado);
 		}
 		
-		total = carrinho.getTotal();
-		sessao.setAttribute("total", total);
+		sessao.setAttribute("total", carrinho.getTotal());
 		sessao.setAttribute("carrinho", carrinho);
 		
 		request.getRequestDispatcher("meuCarrinho.jsp").forward(request, response);

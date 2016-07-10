@@ -38,12 +38,15 @@ public class Carrinho {
 	 * se o autor da promoção está contido em algum item na lista de livros Escolhidos*/
 	public Item contemNaLista(){
 		Item item = null;
-		for(Item i: this.listaItens){
-			if(i.getProduto().getAutor().equals("Martin Fowler")){
-				item = i;
+		if(this.listaItens != null){
+			for(Item i: this.listaItens){
+				if(i.getProduto().getAutor().equals("Martin Fowler")){
+					item = i;
+				}
 			}
+			return item;
 		}
-		return item;
+		return null;
 	}
 	
 	// Aplica o desconto
@@ -52,6 +55,16 @@ public class Carrinho {
 			item.setValorDesconto((item.getSubtotal() * 0.1));
 			item.subtrairSubtotal(item.getValorDesconto());
 			this.total -= item.getValorDesconto();
+		}
+	}
+	
+	public void calculaTotal(){
+		double total = 0.0;
+		if(this.listaItens != null){
+			for(Item i : this.listaItens){
+				total += i.getProduto().getPreco() * i.getQuantidade();
+			}
+			this.total = total;
 		}
 	}
 }

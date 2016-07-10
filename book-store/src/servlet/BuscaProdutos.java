@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Carrinho;
 import model.Item;
 import model.Produto;
 import dao.ProdutoDAO;
@@ -59,7 +58,6 @@ public class BuscaProdutos extends HttpServlet {
 		double subtotal = 0, total=0;
 		Integer indice, quantidade=0, qtdeLivros=0;
 		Item itemEncontrado = null;
-		String resultado = null;
 		
 		//captura Lista de Produtos e LivrosEscolhidos da sessao.
 		List<Produto> produtos = (ArrayList<Produto>) sessao.getAttribute("listaProdutos");
@@ -121,8 +119,6 @@ public class BuscaProdutos extends HttpServlet {
 					produto.atualizaEstoqueVenda();
 				}	
 			}
-		}else{
-			resultado = "Produto com estoque indisponível temporariamente!!!";
 		}
 		
 		//Total de livros e valor correspondente
@@ -132,7 +128,7 @@ public class BuscaProdutos extends HttpServlet {
 				total = total +  i.getProduto().getPreco() * i.getQuantidade();		
 			}
 		}
-		sessao.setAttribute("resultado", resultado);
+	
 		sessao.setAttribute("qtdeLivros", qtdeLivros);
 		sessao.setAttribute("total", total);
 		request.getRequestDispatcher("index.jsp").forward(request, response);

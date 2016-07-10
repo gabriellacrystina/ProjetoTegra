@@ -7,6 +7,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" type="text/css" href="book-store-style.css">
+		<script src="controle-compra.js"></script>
 		<title>BookStore</title>
 	</head>
 	<body>
@@ -19,13 +20,10 @@
 						Itens: <output class="lbl-itens" id="qtde-itens" name="quantidade-itens">${qtdeLivros}</output><br>
 						Total Parcial: <output class="lbl-total" id="total" name="total-itens">${total} R$</output><br>
 						<form action="MeuCarrinho">
-							<button type="submit" class="btn" id="btn-finalizar-compra">Finalizar Compras</button>
+							<button type="submit" class="btn" id="btn-finalizar-compra" onclick=" return validaCarrinho()">Finalizar Compras</button>
 						</form>
 				</div>
 			</div>
-			<c:if test="${resultado != null}" >
-				<c:out value="${resultado}"/>
-			</c:if>
 			<table id="tbl-books">
 			  <tr>
 			    <th>Titulo</th>
@@ -43,9 +41,8 @@
 						<td>
 							<form action="Produtos" method="post" name="produtos" >
 								<input type="hidden" name="id-livro" value="${livro.id}">
-								<button class="btn btn-comprar" type="submit">Comprar</button>
+								<button class="btn btn-comprar" type="submit" onclick="return validaEstoque">Comprar</button>
 							</form>
-							
 						</td>
 					</tr>
 				</c:forEach>

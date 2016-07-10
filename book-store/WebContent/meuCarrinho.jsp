@@ -7,6 +7,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<link rel="stylesheet" type="text/css" href="book-store-style.css">
+		<script src="controle-compra.js"></script>
 		<title>Carrinho</title>
 	</head>
 	<body>
@@ -14,7 +15,7 @@
 			<h3>Possui cumpom de desconto?</h3>
 				<form action="FinalizarCompra" method="post">
 					<p>Informe aqui: <input type="text" id="cupom" name="cupom" maxlength="15"></p>
-					<br><button class="btn btn-validarCumpom" type="submit">Validar Cupom</button>
+					<br><button class="btn btn-validarCumpom" type="submit" onclick="return validarCupom()">Validar Cupom</button>
 				</form>
 			<figure>
 				<img id="img-desconto" src="desconto.jpg" />

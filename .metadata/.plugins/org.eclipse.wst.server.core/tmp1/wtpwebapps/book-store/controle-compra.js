@@ -8,14 +8,12 @@ var trLivros = document.getElementsByClassName("livros");
 for(var i=0; i < trLivros.length; i++ ){
 	var livroTr = trLivros[i];
 
-	var tdId = livroTr.getElementsByClassName("id-livro");
-	var tdNomeLivro = livroTr.getElementsByClassName("nome-livro");
-	var tdNomeAutor = livroTr.getElementsByClassName("nome-autor");
-	var tdPreco =livroTr.getElementsByClassName("preco");
-	var tdEstoque = livroTr.getElementsByClassName("estoque");
+	var tdNomeLivro = livroTr.getElementsByClassName("nome-livro")[0];
+	var tdNomeAutor = livroTr.getElementsByClassName("nome-autor")[0];
+	var tdPreco =livroTr.getElementsByClassName("preco")[0];
+	var tdEstoque = livroTr.getElementsByClassName("estoque")[0];
 	
 	var LivroAtual = {
-		id : tdId.textContent,
 		nomeLivro : tdNomeLivro.textContent,
 		nomeAutor : tdNomeAutor.textContent,
 		preco : tdPreco.textContent,
@@ -23,16 +21,31 @@ for(var i=0; i < trLivros.length; i++ ){
 		validaEstoque : function(){
 			if(this.estoque == 0){
 				alert("Produto indisponível em estoque!!");
+				return false;
 			}
+			return true;
 		}
 	}
 }
 
-
+//valida se carrinho contém itens!!
 function validaCarrinho(){                     
 	var qtdeItens = document.getElementById("qtde-itens").textContent;
 	
 	if(qtdeItens == 0){
 		alert("Não há itens no carrinho!!");
+		return false;
 	}
+	return true;
 }	
+
+//verifica se o input do cupom foi informado
+function validarCupom(){
+	var cupom = document.getElementById("cupom").value;
+	
+	if(cupom == ""){
+		alert("Informe o cupom!!");
+		return false;
+	}
+	return true;
+}
